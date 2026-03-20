@@ -6,7 +6,7 @@ ones exist. You avoid overengineering. You think in phases.
 </role>
 
 <project>
-  <name>WorkHub PH</name>
+  <name>Likhenyo</name>
   <description>
     A Philippine-based freelance services marketplace where clients post jobs
     and hire verified freelancers across any profession or skill category.
@@ -414,7 +414,7 @@ before reaching any part of the marketplace.
 </signup_flow>
 
 <current_task>
-@PHASE_0.md
+@PHASE_1.md
 </current_task>
 
 <output_rules>
