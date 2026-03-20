@@ -4,12 +4,34 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/*
+ * ─── Likhenyo: Philippine Sunrise Theme ───────────────────────────────────────
+ *
+ * Custom theme synthesized from:
+ *   - Ocean Depths  → deep indigo-navy structure & trust
+ *   - Golden Hour   → warm burnt amber & terracotta earthiness
+ *   - Botanical Garden → terracotta secondary accent vitality
+ *
+ * Palette:
+ *   Philippine Indigo  #0F1D42  — primary dark (richer than old navy, more flag-blue)
+ *   Amber Sunburst     #D4841A  — primary accent (deeper burnt amber, PH golden hour)
+ *   Terracotta         #B85239  — secondary accent (Filipino earth warmth)
+ *   Warm Ivory         #FAF2E8  — light background (warmer than pure white, tropical)
+ *
+ * Typography:
+ *   Display:  Fraunces (optical serif, variable weight — breathtaking in italic)
+ *   Wordmark: Plus Jakarta Sans (SE Asian design tradition, warm geometric)
+ *   Body:     Outfit (clean architectural sans, modern yet warm)
+ * ─────────────────────────────────────────────────────────────────────────────
+ */
+
 @theme inline {
+  /* Shadcn base token mappings */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-sans: var(--font-outfit);
+  --font-mono: var(--font-plus-jakarta);
+  --font-heading: var(--font-fraunces);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -46,75 +68,99 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+
+  /* ── Philippine Sunrise palette ── */
+  --color-lk-navy:        #0f1d42;   /* Philippine indigo */
+  --color-lk-navy-light:  #1b3268;
+  --color-lk-navy-deep:   #070d26;
+
+  --color-lk-gold:        #d4841a;   /* Amber sunburst */
+  --color-lk-gold-light:  #e8a535;
+  --color-lk-gold-pale:   #fce9bf;
+
+  --color-lk-terra:       #b85239;   /* Terracotta — new secondary accent */
+  --color-lk-terra-light: #d4705a;
+  --color-lk-terra-pale:  #f5d5cc;
+
+  --color-lk-cream:       #faf2e8;   /* Warm ivory */
+  --color-lk-cream-dark:  #f0e4d2;
+  --color-lk-blue-mist:   #e3ebf8;
+
+  /* ── Font families ── */
+  --font-display:  var(--font-fraunces);       /* Optical serif for hero headlines */
+  --font-wordmark: var(--font-plus-jakarta);   /* SE Asian geometric for UI/logo */
+  --font-body:     var(--font-outfit);          /* Clean architectural sans for text */
 }
 
+/* ── Shadcn light mode ── */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --background:            #faf2e8;
+  --foreground:            #0f1d42;
+  --card:                  #ffffff;
+  --card-foreground:       #0f1d42;
+  --popover:               #ffffff;
+  --popover-foreground:    #0f1d42;
+  --primary:               #0f1d42;
+  --primary-foreground:    #faf2e8;
+  --secondary:             #f0e4d2;
+  --secondary-foreground:  #0f1d42;
+  --muted:                 #f0e4d2;
+  --muted-foreground:      #6b7280;
+  --accent:                #d4841a;
+  --accent-foreground:     #ffffff;
+  --destructive:           oklch(0.577 0.245 27.325);
+  --border:                #e0d0bb;
+  --input:                 #e0d0bb;
+  --ring:                  #d4841a;
+  --chart-1:               #d4841a;
+  --chart-2:               #b85239;
+  --chart-3:               #0f1d42;
+  --chart-4:               #e8a535;
+  --chart-5:               #fce9bf;
+  --radius:                0.5rem;
+  --sidebar:               #0f1d42;
+  --sidebar-foreground:    #faf2e8;
+  --sidebar-primary:       #d4841a;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent:        #1b3268;
+  --sidebar-accent-foreground:  #faf2e8;
+  --sidebar-border:        #1b3268;
+  --sidebar-ring:          #d4841a;
 }
 
+/* ── Shadcn dark mode ── */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background:            #070d26;
+  --foreground:            #faf2e8;
+  --card:                  #0f1d42;
+  --card-foreground:       #faf2e8;
+  --popover:               #0f1d42;
+  --popover-foreground:    #faf2e8;
+  --primary:               #d4841a;
+  --primary-foreground:    #0f1d42;
+  --secondary:             #1b3268;
+  --secondary-foreground:  #faf2e8;
+  --muted:                 #1b3268;
+  --muted-foreground:      #94a3b8;
+  --accent:                #d4841a;
+  --accent-foreground:     #0f1d42;
+  --destructive:           oklch(0.704 0.191 22.216);
+  --border:                #1b3268;
+  --input:                 #1b3268;
+  --ring:                  #d4841a;
+  --chart-1:               #d4841a;
+  --chart-2:               #e8a535;
+  --chart-3:               #b85239;
+  --chart-4:               #fce9bf;
+  --chart-5:               #0f1d42;
+  --sidebar:               #070d26;
+  --sidebar-foreground:    #faf2e8;
+  --sidebar-primary:       #d4841a;
+  --sidebar-primary-foreground: #0f1d42;
+  --sidebar-accent:        #1b3268;
+  --sidebar-accent-foreground:  #faf2e8;
+  --sidebar-border:        #1b3268;
+  --sidebar-ring:          #d4841a;
 }
 
 @layer base {
@@ -125,6 +171,122 @@
     @apply bg-background text-foreground;
   }
   html {
-    @apply font-sans;
+    font-family: var(--font-outfit), system-ui, sans-serif;
   }
+}
+
+/* ─── Likhenyo Utility Classes ──────────────────────────────────────────────── */
+@layer utilities {
+  /* Font families */
+  .font-display {
+    font-family: var(--font-fraunces), Georgia, serif;
+  }
+  .font-wordmark {
+    font-family: var(--font-plus-jakarta), system-ui, sans-serif;
+  }
+  .font-body {
+    font-family: var(--font-outfit), system-ui, sans-serif;
+  }
+
+  /* Text colors */
+  .text-lk-navy        { color: #0f1d42; }
+  .text-lk-navy-light  { color: #1b3268; }
+  .text-lk-gold        { color: #d4841a; }
+  .text-lk-gold-light  { color: #e8a535; }
+  .text-lk-terra       { color: #b85239; }
+  .text-lk-terra-light { color: #d4705a; }
+  .text-lk-cream       { color: #faf2e8; }
+
+  /* Background colors */
+  .bg-lk-navy        { background-color: #0f1d42; }
+  .bg-lk-navy-light  { background-color: #1b3268; }
+  .bg-lk-navy-deep   { background-color: #070d26; }
+  .bg-lk-gold        { background-color: #d4841a; }
+  .bg-lk-gold-light  { background-color: #e8a535; }
+  .bg-lk-gold-pale   { background-color: #fce9bf; }
+  .bg-lk-terra       { background-color: #b85239; }
+  .bg-lk-terra-light { background-color: #d4705a; }
+  .bg-lk-terra-pale  { background-color: #f5d5cc; }
+  .bg-lk-cream       { background-color: #faf2e8; }
+  .bg-lk-cream-dark  { background-color: #f0e4d2; }
+  .bg-lk-blue-mist   { background-color: #e3ebf8; }
+
+  /* Border colors */
+  .border-lk-gold    { border-color: #d4841a; }
+  .border-lk-navy    { border-color: #0f1d42; }
+  .border-lk-terra   { border-color: #b85239; }
+
+  /* Layout helpers */
+  .lk-section {
+    @apply px-6 py-20 md:px-12 lg:px-20;
+  }
+  .lk-container {
+    @apply max-w-7xl mx-auto w-full;
+  }
+}
+
+/* ─── Animations ─────────────────────────────────────────────────────────────*/
+@keyframes float-card {
+  0%, 100% { transform: translateY(0px) rotate(var(--card-rotate, 0deg)); }
+  50%       { transform: translateY(-8px) rotate(var(--card-rotate, 0deg)); }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(32px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes shimmer-slide {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(200%); }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.animate-float {
+  animation: float-card 4.5s ease-in-out infinite;
+}
+
+.animation-delay-100 { animation-delay: 0.1s; }
+.animation-delay-200 { animation-delay: 0.2s; }
+.animation-delay-300 { animation-delay: 0.3s; }
+.animation-delay-400 { animation-delay: 0.4s; }
+.animation-delay-500 { animation-delay: 0.5s; }
+.animation-delay-600 { animation-delay: 0.6s; }
+.animation-delay-700 { animation-delay: 0.7s; }
+.animation-delay-800 { animation-delay: 0.8s; }
+
+/* ─── Gold shimmer on buttons / accents ──────────────────────────────────────*/
+.lk-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.lk-shimmer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.18) 50%,
+    transparent 80%
+  );
+  animation: shimmer-slide 2.4s ease-in-out infinite;
+}
+
+/* ─── Subtle noise texture for dark sections ────────────────────────────────*/
+.lk-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
 }

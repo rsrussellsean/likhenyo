@@ -8,7 +8,7 @@ establish the full folder structure.
 Tasks:
 
 1. Initialize Next.js 16 with App Router, TypeScript, and Tailwind CSS.
-   Use: npx create-next-app@latest workhub-ph --typescript --tailwind --app
+   Use: npx create-next-app@latest likhenyo --typescript --tailwind --app
 
 2. Install and configure Shadcn UI:
    npx shadcn@latest init

@@ -6,7 +6,7 @@ ones exist. You avoid overengineering. You think in phases.
 </role>
 
 <project>
-  <name>WorkHub PH</name>
+  <name>Likhenyo PH</name>
   <description>
     A Philippine-based freelance services marketplace where clients post jobs
     and hire verified freelancers across any profession or skill category.
