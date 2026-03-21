@@ -23,22 +23,22 @@ const CLIENT_STEPS = [
   {
     icon: Users,
     title: "Review Applicants",
-    desc: "Freelancers apply with proposals. Shortlist the ones that fit. Compare profiles and ratings.",
+    desc: "Freelancers apply with proposals. Shortlist the ones that fit.",
   },
   {
     icon: Handshake,
     title: "Hire with Confidence",
-    desc: "Select your freelancer. A booking is created automatically. Set your agreed price and timeline.",
+    desc: "Select your freelancer. A booking is created automatically. Set the agreed price and timeline.",
   },
   {
     icon: MessageSquare,
     title: "Track the Work",
-    desc: "Log your downpayment. Chat inside the platform. Stay updated without leaving Likhenyo.",
+    desc: "Log your downpayment. Chat inside the platform. No external apps needed.",
   },
   {
     icon: Star,
     title: "Receive and Review",
-    desc: "Accept the deliverables. Leave a review. Build a track record for future hires.",
+    desc: "Accept deliverables. Leave a review. Build a track record for future hires.",
   },
 ];
 
@@ -61,12 +61,12 @@ const FREELANCER_STEPS = [
   {
     icon: Send,
     title: "Do the Work",
-    desc: "Agree on the price and timeline. Communicate through the built-in chat. No need for external apps.",
+    desc: "Agree on the price and timeline. Communicate through built-in chat.",
   },
   {
     icon: DollarSign,
     title: "Get Paid and Grow",
-    desc: "Submit your work. Receive payment. Collect reviews that build your reputation on the platform.",
+    desc: "Submit your work. Receive payment. Collect reviews that build your reputation.",
   },
 ];
 
@@ -78,26 +78,29 @@ function StepFlow({
   return (
     <div className="relative">
       {/* Connector line — desktop */}
-      <div className="hidden md:block absolute top-10 left-10 right-10 h-px bg-gradient-to-r from-lk-gold/0 via-lk-gold/40 to-lk-gold/0" />
+      <div className="hidden md:block absolute top-10 left-10 right-10 h-px bg-gradient-to-r from-lk-primary/0 via-lk-primary/30 to-lk-primary/0" />
 
       <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-4">
         {steps.map((step, i) => {
           const Icon = step.icon;
           return (
-            <div key={step.title} className="flex flex-col items-center text-center md:items-start md:text-left relative">
-              {/* Step number + icon */}
+            <div
+              key={step.title}
+              className="flex flex-col items-center text-center md:items-start md:text-left relative"
+            >
+              {/* Step badge + icon */}
               <div className="relative mb-5">
-                <div className="w-20 h-20 rounded-2xl bg-lk-navy flex items-center justify-center border border-lk-navy-light shadow-lg">
-                  <Icon size={28} className="text-lk-gold" />
+                <div className="w-20 h-20 rounded-2xl bg-lk-primary-pale flex items-center justify-center shadow-sm">
+                  <Icon size={26} className="text-lk-primary" />
                 </div>
-                <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-lk-gold text-white font-wordmark font-bold text-xs flex items-center justify-center">
+                <div className="absolute -top-2 -right-2 w-6 h-6 rounded-full bg-lk-primary text-white font-headline font-bold text-xs flex items-center justify-center shadow-md">
                   {i + 1}
                 </div>
               </div>
-              <h3 className="font-wordmark font-semibold text-lk-navy text-base mb-2">
+              <h3 className="font-headline font-semibold text-lk-dark text-base mb-2">
                 {step.title}
               </h3>
-              <p className="font-body text-sm text-lk-navy/60 leading-relaxed">
+              <p className="font-inter text-sm text-lk-dark/55 leading-relaxed">
                 {step.desc}
               </p>
             </div>
@@ -112,45 +115,48 @@ export default function HowItWorks() {
   const [tab, setTab] = useState<"clients" | "freelancers">("clients");
 
   return (
-    <section id="how-it-works" className="lk-section bg-lk-cream-dark">
+    <section id="how-it-works" className="lk-section bg-white">
       <div className="lk-container">
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="flex items-center justify-center gap-2 mb-5">
-            <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
-            <span className="font-wordmark text-xs font-medium text-lk-navy/40 uppercase tracking-[0.18em]">How It Works</span>
-            <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
+          <div className="inline-flex items-center gap-2 bg-lk-primary-pale border border-lk-primary/15 rounded-full px-4 py-1.5 mb-6">
+            <span className="font-inter text-xs font-semibold text-lk-primary uppercase tracking-widest">
+              How It Works
+            </span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-lk-navy">
+          <h2
+            className="font-headline font-extrabold text-lk-dark leading-tight"
+            style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
+          >
             Simple.{" "}
-            <span className="italic text-lk-gold">Structured.</span>{" "}
+            <span className="text-lk-primary">Structured.</span>{" "}
             Trusted.
           </h2>
-          <p className="mt-4 font-body text-lk-navy/60 text-lg max-w-xl mx-auto">
-            A clear process from job posting to payment — no ambiguity, no
-            scattered conversations.
+          <p className="mt-4 font-inter text-lk-dark/55 text-lg max-w-xl mx-auto">
+            A clear process from job posting to payment — no ambiguity,
+            no scattered conversations.
           </p>
         </div>
 
         {/* Tabs */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-lk-cream rounded-xl p-1 border border-lk-cream-dark shadow-inner">
+          <div className="inline-flex bg-lk-neutral rounded-xl p-1 border border-lk-neutral-mid">
             <button
               onClick={() => setTab("clients")}
-              className={`font-wordmark font-semibold text-sm px-7 py-2.5 rounded-lg transition-all ${
+              className={`font-inter font-semibold text-sm px-7 py-2.5 rounded-lg transition-all ${
                 tab === "clients"
-                  ? "bg-lk-navy text-lk-cream shadow-md"
-                  : "text-lk-navy/60 hover:text-lk-navy"
+                  ? "bg-lk-primary text-white shadow-md shadow-lk-primary/25"
+                  : "text-lk-dark/60 hover:text-lk-dark"
               }`}
             >
               For Clients
             </button>
             <button
               onClick={() => setTab("freelancers")}
-              className={`font-wordmark font-semibold text-sm px-7 py-2.5 rounded-lg transition-all ${
+              className={`font-inter font-semibold text-sm px-7 py-2.5 rounded-lg transition-all ${
                 tab === "freelancers"
-                  ? "bg-lk-navy text-lk-cream shadow-md"
-                  : "text-lk-navy/60 hover:text-lk-navy"
+                  ? "bg-lk-primary text-white shadow-md shadow-lk-primary/25"
+                  : "text-lk-dark/60 hover:text-lk-dark"
               }`}
             >
               For Freelancers
@@ -159,7 +165,7 @@ export default function HowItWorks() {
         </div>
 
         {/* Step flow */}
-        <div className="transition-all duration-300">
+        <div>
           {tab === "clients" ? (
             <StepFlow steps={CLIENT_STEPS} />
           ) : (

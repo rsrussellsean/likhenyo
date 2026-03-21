@@ -69,39 +69,51 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* ── Philippine Sunrise palette ── */
-  --color-lk-navy:        #0f1d42;   /* Philippine indigo */
+  /* ── Philippine Sunrise palette (legacy — kept for auth/dashboard pages) ── */
+  --color-lk-navy:        #0f1d42;
   --color-lk-navy-light:  #1b3268;
   --color-lk-navy-deep:   #070d26;
-
-  --color-lk-gold:        #d4841a;   /* Amber sunburst */
+  --color-lk-gold:        #d4841a;
   --color-lk-gold-light:  #e8a535;
   --color-lk-gold-pale:   #fce9bf;
-
-  --color-lk-terra:       #b85239;   /* Terracotta — new secondary accent */
+  --color-lk-terra:       #b85239;
   --color-lk-terra-light: #d4705a;
   --color-lk-terra-pale:  #f5d5cc;
-
-  --color-lk-cream:       #faf2e8;   /* Warm ivory */
+  --color-lk-cream:       #faf2e8;
   --color-lk-cream-dark:  #f0e4d2;
   --color-lk-blue-mist:   #e3ebf8;
 
+  /* ── Radiant Artisan palette (landing page redesign) ── */
+  --color-lk-primary:       #0052FF;   /* Trust anchor blue */
+  --color-lk-primary-dark:  #003DD9;   /* Hover / deeper shade */
+  --color-lk-primary-light: #4D7FFF;   /* Lighter accent */
+  --color-lk-primary-pale:  #EBF0FF;   /* Subtle bg tint */
+  --color-lk-red:           #EE2B2B;   /* Secondary — energy / live */
+  --color-lk-red-pale:      #FFEAEA;
+  --color-lk-yellow:        #FFCD00;   /* Tertiary — Henyo gold */
+  --color-lk-yellow-pale:   #FFF9CC;
+  --color-lk-neutral:       #F8FAFC;   /* Base surface */
+  --color-lk-neutral-mid:   #EDF2F7;   /* Slightly darker surface */
+  --color-lk-dark:          #0A1628;   /* Dark text / footer */
+
   /* ── Font families ── */
-  --font-display:  var(--font-fraunces);       /* Optical serif for hero headlines */
-  --font-wordmark: var(--font-plus-jakarta);   /* SE Asian geometric for UI/logo */
-  --font-body:     var(--font-outfit);          /* Clean architectural sans for text */
+  --font-display:   var(--font-fraunces);       /* Legacy serif */
+  --font-wordmark:  var(--font-plus-jakarta);   /* Legacy wordmark */
+  --font-body:      var(--font-outfit);          /* Legacy body */
+  --font-headline:  var(--font-manrope);         /* Radiant Artisan headline */
+  --font-inter:     var(--font-inter);           /* Radiant Artisan body/labels */
 }
 
 /* ── Shadcn light mode ── */
 :root {
-  --background:            #faf2e8;
-  --foreground:            #0f1d42;
+  --background:            #F8FAFC;
+  --foreground:            #0A1628;
   --card:                  #ffffff;
   --card-foreground:       #0f1d42;
   --popover:               #ffffff;
   --popover-foreground:    #0f1d42;
-  --primary:               #0f1d42;
-  --primary-foreground:    #faf2e8;
+  --primary:               #0052FF;
+  --primary-foreground:    #ffffff;
   --secondary:             #f0e4d2;
   --secondary-foreground:  #0f1d42;
   --muted:                 #f0e4d2;
@@ -187,6 +199,12 @@
   .font-body {
     font-family: var(--font-outfit), system-ui, sans-serif;
   }
+  .font-headline {
+    font-family: var(--font-manrope), system-ui, sans-serif;
+  }
+  .font-inter {
+    font-family: var(--font-inter), system-ui, sans-serif;
+  }
 
   /* Text colors */
   .text-lk-navy        { color: #0f1d42; }
@@ -211,10 +229,40 @@
   .bg-lk-cream-dark  { background-color: #f0e4d2; }
   .bg-lk-blue-mist   { background-color: #e3ebf8; }
 
-  /* Border colors */
+  /* Border colors (legacy) */
   .border-lk-gold    { border-color: #d4841a; }
   .border-lk-navy    { border-color: #0f1d42; }
   .border-lk-terra   { border-color: #b85239; }
+
+  /* ── Radiant Artisan text colors ── */
+  .text-lk-primary       { color: #0052FF; }
+  .text-lk-primary-dark  { color: #003DD9; }
+  .text-lk-primary-light { color: #4D7FFF; }
+  .text-lk-red           { color: #EE2B2B; }
+  .text-lk-yellow        { color: #FFCD00; }
+  .text-lk-dark          { color: #0A1628; }
+  .text-lk-neutral       { color: #F8FAFC; }
+
+  /* ── Radiant Artisan background colors ── */
+  .bg-lk-primary        { background-color: #0052FF; }
+  .bg-lk-primary-dark   { background-color: #003DD9; }
+  .bg-lk-primary-light  { background-color: #4D7FFF; }
+  .bg-lk-primary-pale   { background-color: #EBF0FF; }
+  .bg-lk-red            { background-color: #EE2B2B; }
+  .bg-lk-red-pale       { background-color: #FFEAEA; }
+  .bg-lk-yellow         { background-color: #FFCD00; }
+  .bg-lk-yellow-pale    { background-color: #FFF9CC; }
+  .bg-lk-neutral        { background-color: #F8FAFC; }
+  .bg-lk-neutral-mid    { background-color: #EDF2F7; }
+  .bg-lk-dark           { background-color: #0A1628; }
+
+  /* ── Radiant Artisan border colors ── */
+  .border-lk-primary      { border-color: #0052FF; }
+  .border-lk-primary-pale { border-color: #EBF0FF; }
+  .border-lk-red          { border-color: #EE2B2B; }
+  .border-lk-yellow       { border-color: #FFCD00; }
+  .border-lk-neutral-mid  { border-color: #EDF2F7; }
+  .border-lk-dark         { border-color: #0A1628; }
 
   /* Layout helpers */
   .lk-section {

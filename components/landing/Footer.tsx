@@ -41,7 +41,7 @@ const FOOTER_COLS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-lk-navy-deep border-t border-lk-navy-light">
+    <footer className="bg-lk-dark border-t border-white/5">
       <div className="lk-container px-6 md:px-12 lg:px-20 py-16">
         {/* Top row */}
         <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
@@ -49,21 +49,41 @@ export default function Footer() {
           <div className="col-span-2 md:col-span-1">
             <Link
               href="/"
-              className="font-wordmark font-bold text-2xl text-lk-cream flex items-center gap-0.5"
+              className="font-headline font-bold text-2xl text-white flex items-center gap-0.5"
             >
-              <span className="text-lk-gold">L</span>
-              <span>ikhenyo</span>
+              <span className="text-lk-primary">Lik</span>
+              <span>henyo</span>
             </Link>
-            <p className="mt-3 font-body text-sm text-lk-cream/40 leading-relaxed">
+            <p className="mt-3 font-inter text-sm text-white/35 leading-relaxed">
               Hire Any Skilled Professional in the Philippines. Verified and
               Structured.
             </p>
+
+            {/* Social links */}
+            <div className="mt-6 flex items-center gap-4">
+              {[
+                { Icon: Facebook, href: "https://facebook.com", label: "Facebook" },
+                { Icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+                { Icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+              ].map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
+                  className="text-white/30 hover:text-lk-primary transition-colors"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Link columns */}
           {FOOTER_COLS.map((col) => (
             <div key={col.heading}>
-              <h4 className="font-wordmark font-semibold text-sm text-lk-cream mb-4 uppercase tracking-wider">
+              <h4 className="font-inter font-semibold text-xs text-white/50 mb-4 uppercase tracking-widest">
                 {col.heading}
               </h4>
               <ul className="flex flex-col gap-2.5">
@@ -71,7 +91,7 @@ export default function Footer() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="font-body text-sm text-lk-cream/50 hover:text-lk-cream/80 transition-colors"
+                      className="font-inter text-sm text-white/40 hover:text-white/80 transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -83,41 +103,18 @@ export default function Footer() {
         </div>
 
         {/* Divider */}
-        <div className="mt-14 mb-6 h-px bg-lk-navy-light" />
+        <div className="mt-14 mb-6 h-px bg-white/8" />
 
         {/* Bottom bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="font-body text-sm text-lk-cream/30">
+          <p className="font-inter text-sm text-white/25">
             © 2025 Likhenyo. All rights reserved.
           </p>
-          <div className="flex items-center gap-5">
-            <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-              className="text-lk-cream/40 hover:text-lk-cream transition-colors"
-            >
-              <Facebook size={18} />
-            </a>
-            <a
-              href="https://linkedin.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="text-lk-cream/40 hover:text-lk-cream transition-colors"
-            >
-              <Linkedin size={18} />
-            </a>
-            <a
-              href="https://instagram.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-              className="text-lk-cream/40 hover:text-lk-cream transition-colors"
-            >
-              <Instagram size={18} />
-            </a>
+          <div className="flex items-center gap-2">
+            <span className="w-1.5 h-1.5 rounded-full bg-lk-primary" aria-hidden="true" />
+            <span className="font-inter text-xs text-white/25">
+              Built for the Philippines
+            </span>
           </div>
         </div>
       </div>

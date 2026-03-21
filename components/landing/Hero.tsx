@@ -1,195 +1,206 @@
+import Image from "next/image";
 import Link from "next/link";
-import { BadgeCheck, Star } from "lucide-react";
+import { BadgeCheck, Star, MapPin } from "lucide-react";
 
-/*
- * Hero — Scheme1-inspired: centered headline flanked by floating freelancer
- * cards (left/right columns), two CTA pills below, trust bar at bottom.
- * Cream background, Fraunces headline — scheme.jpg color palette.
- */
-
-const LEFT_CARDS = [
-  {
-    name: "Marco V.",
-    role: "Structural Engineer",
-    location: "Cebu City",
-    rating: 4.9,
-    initials: "MV",
-    color: "from-[#0f1d42] to-[#1b3268]",
-    rotate: "-2deg",
-    delay: "0s",
-  },
-  {
-    name: "Dana M.",
-    role: "Brand Designer",
-    location: "Remote — Cebu",
-    rating: 4.8,
-    initials: "DM",
-    color: "from-[#8a5a0a] to-[#d4841a]",
-    rotate: "1.5deg",
-    delay: "1s",
-  },
+const TRUST_ITEMS = [
+  "Any Profession",
+  "100% ID Verified",
+  "₱0 Platform Fee",
+  "Starting in Cebu",
 ];
-
-const RIGHT_CARDS = [
-  {
-    name: "Jasmine R.",
-    role: "Full Stack Dev",
-    location: "Mandaue City",
-    rating: 5.0,
-    initials: "JR",
-    color: "from-[#8a3220] to-[#b85239]",
-    rotate: "2deg",
-    delay: "0.5s",
-  },
-  {
-    name: "Carlo B.",
-    role: "Architect",
-    location: "Cebu City",
-    rating: 5.0,
-    initials: "CB",
-    color: "from-[#1a4a3a] to-[#2d7a5e]",
-    rotate: "-1.5deg",
-    delay: "1.4s",
-  },
-];
-
-type CardData = (typeof LEFT_CARDS)[0];
-
-function FloatingCard({ card }: { card: CardData }) {
-  return (
-    <div
-      className="bg-white rounded-2xl p-4 shadow-lg shadow-lk-navy/8 border border-lk-navy/6
-                 animate-[float-card_5s_ease-in-out_infinite]"
-      style={{ "--card-rotate": card.rotate, animationDelay: card.delay } as React.CSSProperties}
-    >
-      <div className="flex items-center gap-2.5 mb-2.5">
-        <div
-          className={`w-9 h-9 rounded-xl bg-gradient-to-br ${card.color}
-                      flex items-center justify-center text-white font-wordmark font-bold text-xs shrink-0`}
-        >
-          {card.initials}
-        </div>
-        <div className="min-w-0">
-          <div className="flex items-center gap-1">
-            <span className="font-wordmark font-semibold text-lk-navy text-xs">{card.name}</span>
-            <BadgeCheck size={11} className="text-lk-gold shrink-0" />
-          </div>
-          <p className="font-body text-[10px] text-lk-navy/50 truncate mt-0.5">{card.role}</p>
-        </div>
-      </div>
-      <div className="flex items-center gap-0.5 pt-2 border-t border-lk-cream-dark">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            size={9}
-            className={i < Math.floor(card.rating) ? "text-lk-gold fill-lk-gold" : "text-lk-navy/15"}
-          />
-        ))}
-        <span className="font-wordmark text-[10px] text-lk-navy/40 ml-1">{card.rating}</span>
-        <span className="font-body text-[9px] text-lk-navy/30 ml-auto truncate">{card.location}</span>
-      </div>
-    </div>
-  );
-}
 
 export default function Hero() {
   return (
-    <section className="relative bg-lk-cream overflow-hidden pt-24 md:pt-32 pb-0">
+    <section className="relative bg-white overflow-hidden pt-16">
+      {/* Radial glow — top-left corner tint */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 50% at 0% 0%, rgba(0,82,255,0.06) 0%, transparent 70%)",
+        }}
+      />
+
       <div className="lk-container px-6 md:px-12 lg:px-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[88vh] py-16 lg:py-20">
 
-        {/* ── Scheme1: // section label // — centered ── */}
-        <div className="flex items-center justify-center gap-2 mb-8 animate-fade-up opacity-0">
-          <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
-          <span className="font-wordmark text-[11px] font-medium text-lk-navy/40 uppercase tracking-[0.2em]">
-            The Philippine Freelance Platform
-          </span>
-          <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
-        </div>
+          {/* ── Left: Text content ── */}
+          <div className="flex flex-col items-start animate-fade-up opacity-0">
+            {/* Eyebrow chip */}
+            <div className="inline-flex items-center gap-2 bg-lk-primary-pale border border-lk-primary/15 rounded-full px-4 py-1.5 mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-lk-primary" aria-hidden="true" />
+              <span className="font-inter text-xs font-semibold text-lk-primary uppercase tracking-widest">
+                The Philippine Freelance Platform
+              </span>
+            </div>
 
-        {/* ── Scheme1: 3-col grid — left cards | center | right cards ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr_220px] xl:grid-cols-[255px_1fr_255px] items-center gap-6">
-
-          {/* Left floating cards */}
-          <div className="hidden lg:flex flex-col gap-4">
-            {LEFT_CARDS.map((c) => <FloatingCard key={c.name} card={c} />)}
-          </div>
-
-          {/* Center: headline + subtitle + CTAs */}
-          <div className="text-center">
+            {/* Headline */}
             <h1
-              className="font-display font-black text-lk-navy leading-[0.9] animate-fade-up opacity-0 animation-delay-100"
-              style={{ fontSize: "clamp(3.8rem, 9vw, 7.5rem)" }}
-              lang="tl"
+              className="font-headline font-extrabold text-lk-dark leading-[1.08] mb-6"
+              style={{ fontSize: "clamp(2.6rem, 5vw, 4.2rem)" }}
             >
-              Likha Mo,
+              Hire Any Skilled
               <br />
-              <em className="text-lk-gold" style={{ fontStyle: "italic" }}>Henyo Mo.</em>
+              <span className="text-lk-primary">Professional</span>
+              {" "}in the{" "}
+              <span className="relative inline-block">
+                Philippines
+                <span
+                  className="absolute -bottom-1 left-0 right-0 h-1 rounded-full"
+                  style={{ background: "#FFCD00" }}
+                  aria-hidden="true"
+                />
+              </span>
             </h1>
 
+            {/* Subtitle */}
             <p
-              className="mt-6 font-body text-lk-navy/45 leading-relaxed mx-auto animate-fade-up opacity-0 animation-delay-200"
-              style={{ fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)", maxWidth: "30rem" }}
+              className="font-inter text-lk-dark/55 leading-relaxed mb-10 max-w-lg"
+              style={{ fontSize: "clamp(1rem, 1.5vw, 1.1rem)" }}
             >
-              Connect with verified Filipino professionals — engineers,
-              developers, designers, and more. Post jobs or find work,
-              all in one place.
+              Connect with verified Filipino professionals — engineers, developers,
+              designers, and more. Post jobs or find work on one structured platform.
             </p>
 
-            {/* Scheme1: two side-by-side pill CTAs */}
-            <div className="mt-9 flex items-center justify-center gap-3 flex-wrap animate-fade-up opacity-0 animation-delay-300">
+            {/* CTAs */}
+            <div className="flex items-center gap-3 flex-wrap">
               <Link
                 href="/signup?role=client"
-                className="inline-flex items-center gap-2 bg-lk-navy hover:bg-lk-navy-light text-lk-cream
-                           font-wordmark font-semibold text-sm px-7 py-3 rounded-full transition-all"
+                className="inline-flex items-center gap-2 font-inter font-semibold text-sm
+                           bg-lk-primary hover:bg-lk-primary-dark text-white
+                           px-7 py-3.5 rounded-xl transition-all
+                           shadow-lg shadow-lk-primary/25 hover:shadow-lk-primary/40 hover:-translate-y-0.5"
               >
                 Post a Job
-                <span className="text-lk-gold">↗</span>
+                <span aria-hidden="true">↗</span>
               </Link>
               <Link
                 href="/signup?role=freelancer"
-                className="inline-flex items-center gap-2 border border-lk-navy/20 hover:border-lk-navy/50
-                           hover:bg-lk-navy/5 text-lk-navy font-wordmark font-semibold text-sm px-7 py-3
-                           rounded-full transition-all"
+                className="inline-flex items-center gap-2 font-inter font-semibold text-sm
+                           border-2 border-lk-dark/15 hover:border-lk-primary
+                           text-lk-dark hover:text-lk-primary
+                           px-7 py-3.5 rounded-xl transition-all hover:bg-lk-primary-pale"
               >
                 Find Work →
               </Link>
             </div>
+
+            {/* Trust strip */}
+            <div className="mt-12 pt-8 border-t border-lk-neutral-mid w-full">
+              <div className="flex flex-wrap gap-x-6 gap-y-2">
+                {TRUST_ITEMS.map((item) => (
+                  <div key={item} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-lk-yellow" aria-hidden="true" />
+                    <span className="font-inter text-[11px] font-medium text-lk-dark/45 uppercase tracking-widest">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Right floating cards */}
-          <div className="hidden lg:flex flex-col gap-4">
-            {RIGHT_CARDS.map((c) => <FloatingCard key={c.name} card={c} />)}
+          {/* ── Right: Image + floating glassmorphic cards ── */}
+          <div className="relative hidden lg:block animate-slide-in-right opacity-0">
+            {/* Main image */}
+            <div className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl shadow-lk-dark/12">
+              <Image
+                src="/images/Filipino_meeting_client.jpg"
+                alt="Filipino professionals collaborating"
+                fill
+                className="object-cover"
+                priority
+              />
+              {/* Gradient veil */}
+              <div className="absolute inset-0 bg-gradient-to-t from-lk-dark/25 via-transparent to-transparent" />
+            </div>
+
+            {/* Floating card — top left */}
+            <div className="absolute -left-8 top-14 bg-white/85 backdrop-blur-xl rounded-2xl p-4 shadow-xl shadow-lk-dark/8 border border-white/60 w-52 animate-[float-card_5s_ease-in-out_infinite]"
+              style={{ "--card-rotate": "-2deg" } as React.CSSProperties}>
+              <div className="flex items-center gap-2.5 mb-2.5">
+                <div className="w-9 h-9 rounded-xl bg-lk-primary flex items-center justify-center text-white font-headline font-bold text-xs shrink-0">
+                  MV
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1">
+                    <span className="font-headline font-semibold text-lk-dark text-xs">Marco V.</span>
+                    <BadgeCheck size={11} className="text-lk-primary shrink-0" />
+                  </div>
+                  <p className="font-inter text-[10px] text-lk-dark/50 truncate mt-0.5">Structural Engineer</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-0.5 pt-2 border-t border-lk-neutral-mid">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={9} className="text-lk-yellow fill-lk-yellow" />
+                ))}
+                <span className="font-inter text-[10px] text-lk-dark/40 ml-1">4.9</span>
+                <MapPin size={8} className="text-lk-dark/25 ml-auto" />
+                <span className="font-inter text-[9px] text-lk-dark/30 ml-0.5 truncate">Cebu City</span>
+              </div>
+            </div>
+
+            {/* Floating card — bottom right */}
+            <div className="absolute -right-8 bottom-20 bg-white/85 backdrop-blur-xl rounded-2xl p-4 shadow-xl shadow-lk-dark/8 border border-white/60 w-52 animate-[float-card_5s_ease-in-out_infinite]"
+              style={{ "--card-rotate": "2deg", animationDelay: "0.7s" } as React.CSSProperties}>
+              <div className="flex items-center gap-2.5 mb-2.5">
+                <div className="w-9 h-9 rounded-xl bg-lk-red flex items-center justify-center text-white font-headline font-bold text-xs shrink-0">
+                  JR
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1">
+                    <span className="font-headline font-semibold text-lk-dark text-xs">Jasmine R.</span>
+                    <BadgeCheck size={11} className="text-lk-primary shrink-0" />
+                  </div>
+                  <p className="font-inter text-[10px] text-lk-dark/50 truncate mt-0.5">Full Stack Dev</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-0.5 pt-2 border-t border-lk-neutral-mid">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={9} className="text-lk-yellow fill-lk-yellow" />
+                ))}
+                <span className="font-inter text-[10px] text-lk-dark/40 ml-1">5.0</span>
+                <span className="font-inter text-[9px] text-lk-dark/30 ml-auto truncate">Mandaue City</span>
+              </div>
+            </div>
+
+            {/* Floating stat badge */}
+            <div className="absolute -right-4 top-1/3 bg-lk-primary rounded-2xl p-4 shadow-xl shadow-lk-primary/30">
+              <div className="text-white font-headline font-bold text-2xl leading-none">100%</div>
+              <div className="text-white/70 font-inter text-xs mt-1">ID Verified</div>
+            </div>
           </div>
         </div>
-
-        {/* Mobile: 2 cards below headline */}
-        <div className="lg:hidden mt-8 grid grid-cols-2 gap-3">
-          <FloatingCard card={LEFT_CARDS[0]} />
-          <FloatingCard card={RIGHT_CARDS[0]} />
-        </div>
-
-        {/* ── Scheme1 trust bar — replaces logo strip ── */}
-        <div className="mt-14 py-6 border-t border-lk-navy/8 animate-fade-up opacity-0 animation-delay-400">
-          <div className="flex items-center justify-center flex-wrap gap-3">
-            {["Any Profession", "100% Verified", "₱0 Platform Fee", "Starting in Cebu"].map(
-              (label, i, arr) => (
-                <span key={label} className="flex items-center gap-3">
-                  <span className="font-wordmark text-[11px] font-medium text-lk-navy/30 uppercase tracking-widest">
-                    {label}
-                  </span>
-                  {i < arr.length - 1 && (
-                    <span className="w-1 h-1 rounded-full bg-lk-navy/15" aria-hidden="true" />
-                  )}
-                </span>
-              )
-            )}
-          </div>
-        </div>
-
       </div>
 
-      {/* Bottom section divider */}
-      <div className="border-t border-lk-navy/8" />
+      {/* Mobile: two cards below headline */}
+      <div className="lg:hidden px-6 pb-8 grid grid-cols-2 gap-3">
+        {[
+          { initials: "MV", name: "Marco V.", role: "Structural Engineer", rating: 4.9, color: "bg-lk-primary" },
+          { initials: "JR", name: "Jasmine R.", role: "Full Stack Dev", rating: 5.0, color: "bg-lk-red" },
+        ].map((card) => (
+          <div key={card.name} className="bg-lk-neutral rounded-2xl p-4 border border-lk-neutral-mid">
+            <div className="flex items-center gap-2 mb-2">
+              <div className={`w-8 h-8 rounded-xl ${card.color} flex items-center justify-center text-white font-headline font-bold text-xs shrink-0`}>
+                {card.initials}
+              </div>
+              <div className="min-w-0">
+                <div className="font-headline font-semibold text-lk-dark text-xs truncate">{card.name}</div>
+                <div className="font-inter text-[9px] text-lk-dark/50 truncate">{card.role}</div>
+              </div>
+            </div>
+            <div className="flex gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={8} className="text-lk-yellow fill-lk-yellow" />
+              ))}
+              <span className="font-inter text-[9px] text-lk-dark/40 ml-1">{card.rating}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div className="border-t border-lk-neutral-mid" />
     </section>
   );
 }

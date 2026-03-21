@@ -1,4 +1,4 @@
-import { Star } from "lucide-react";
+import { Star, Quote } from "lucide-react";
 
 const TESTIMONIALS = [
   {
@@ -9,7 +9,7 @@ const TESTIMONIALS = [
     quote:
       "Finally, a platform that takes verification seriously. Clients here actually know what they're hiring.",
     initials: "MV",
-    color: "from-blue-900 to-blue-700",
+    bg: "bg-lk-primary",
   },
   {
     name: "Jasmine Reyes",
@@ -19,7 +19,7 @@ const TESTIMONIALS = [
     quote:
       "I used to find projects through Facebook groups. Likhenyo is so much more organized. My proposals actually get read.",
     initials: "JR",
-    color: "from-amber-800 to-amber-600",
+    bg: "bg-lk-red",
   },
   {
     name: "Dana Mercado",
@@ -29,63 +29,68 @@ const TESTIMONIALS = [
     quote:
       "The in-app chat means I never have to share my number with a client before we've agreed on terms. Big deal for me.",
     initials: "DM",
-    color: "from-emerald-900 to-emerald-700",
+    bg: "bg-lk-dark",
   },
 ];
 
 export default function Testimonials() {
   return (
-    <section className="lk-section bg-lk-cream">
+    <section className="lk-section bg-white">
       <div className="lk-container">
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="flex items-center justify-center gap-2 mb-5">
-            <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
-            <span className="font-wordmark text-xs font-medium text-lk-navy/40 uppercase tracking-[0.18em]">Testimonials</span>
-            <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
+          <div className="inline-flex items-center gap-2 bg-lk-yellow-pale border border-lk-yellow/40 rounded-full px-4 py-1.5 mb-6">
+            <span className="font-inter text-xs font-semibold text-lk-dark/70 uppercase tracking-widest">
+              Testimonials
+            </span>
           </div>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-lk-navy">
+          <h2
+            className="font-headline font-extrabold text-lk-dark leading-tight"
+            style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
+          >
             What Professionals{" "}
-            <span className="italic text-lk-gold">Are Saying</span>
+            <span className="text-lk-primary">Are Saying</span>
           </h2>
         </div>
 
         {/* Cards */}
-        <div className="flex gap-6 overflow-x-auto md:grid md:grid-cols-3 pb-2 md:pb-0 snap-x snap-mandatory md:snap-none scrollbar-none">
+        <div className="flex gap-6 overflow-x-auto md:grid md:grid-cols-3 pb-4 md:pb-0 snap-x snap-mandatory md:snap-none">
           {TESTIMONIALS.map((t) => (
             <div
               key={t.name}
-              className="min-w-[300px] md:min-w-0 snap-start bg-white rounded-2xl border border-lk-cream-dark p-8 flex flex-col hover:shadow-lg hover:shadow-lk-navy/5 transition-all"
+              className="min-w-[300px] md:min-w-0 snap-start bg-lk-neutral rounded-3xl p-8 flex flex-col hover:shadow-lg hover:-translate-y-0.5 transition-all"
             >
+              {/* Quote icon */}
+              <Quote
+                size={28}
+                className="text-lk-primary/20 mb-4 shrink-0"
+                aria-hidden="true"
+              />
+
               {/* Stars */}
-              <div className="flex gap-1 mb-6">
+              <div className="flex gap-1 mb-5">
                 {Array.from({ length: t.rating }).map((_, i) => (
-                  <Star
-                    key={i}
-                    size={16}
-                    className="text-lk-gold fill-lk-gold"
-                  />
+                  <Star key={i} size={14} className="text-lk-yellow fill-lk-yellow" />
                 ))}
               </div>
 
-              {/* Quote */}
-              <p className="font-body text-lk-navy/80 leading-relaxed flex-1 text-base italic">
+              {/* Quote text */}
+              <p className="font-inter text-lk-dark/75 leading-relaxed flex-1 text-base">
                 &ldquo;{t.quote}&rdquo;
               </p>
 
               {/* Author */}
-              <div className="mt-6 pt-6 border-t border-lk-cream-dark flex items-center gap-3">
-                {/* Illustrated avatar */}
+              <div className="mt-6 pt-6 border-t border-lk-neutral-mid flex items-center gap-3">
                 <div
-                  className={`w-11 h-11 rounded-xl bg-gradient-to-br ${t.color} flex items-center justify-center text-white font-wordmark font-bold text-sm shrink-0`}
+                  className={`w-11 h-11 rounded-xl ${t.bg} flex items-center justify-center text-white font-headline font-bold text-sm shrink-0`}
                 >
                   {t.initials}
                 </div>
                 <div>
-                  <div className="font-wordmark font-semibold text-sm text-lk-navy">
+                  <div className="font-headline font-semibold text-sm text-lk-dark">
                     {t.name}
                   </div>
-                  <div className="font-body text-xs text-lk-navy/50">
+                  <div className="font-inter text-xs text-lk-dark/50">
                     {t.profession} · {t.location}
                   </div>
                 </div>
