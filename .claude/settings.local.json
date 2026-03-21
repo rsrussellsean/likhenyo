@@ -3,7 +3,9 @@
     "allow": [
       "Bash(npx:*)",
       "Bash(npm install:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Read(//d/Projects/likhenyo/**)",
+      "Read(//c/Users/Russell/**)"
     ]
   },
   "enableAllProjectMcpServers": true,

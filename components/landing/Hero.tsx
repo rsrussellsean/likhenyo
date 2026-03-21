@@ -1,97 +1,92 @@
 import Link from "next/link";
-import { Star, MapPin, BadgeCheck } from "lucide-react";
+import { BadgeCheck, Star } from "lucide-react";
 
-/* Mocked freelancer cards — illustrative only, no real data */
-const MOCK_CARDS = [
+/*
+ * Hero — Scheme1-inspired: centered headline flanked by floating freelancer
+ * cards (left/right columns), two CTA pills below, trust bar at bottom.
+ * Cream background, Fraunces headline — scheme.jpg color palette.
+ */
+
+const LEFT_CARDS = [
   {
     name: "Marco V.",
-    profession: "Structural Engineer",
+    role: "Structural Engineer",
     location: "Cebu City",
-    rate: "₱1,200/hr",
     rating: 4.9,
-    reviews: 38,
-    verified: true,
     initials: "MV",
-    color: "from-[#0f1d42] to-[#1b3268]",   /* Philippine indigo */
-  },
-  {
-    name: "Jasmine R.",
-    profession: "Full Stack Developer",
-    location: "Mandaue City",
-    rate: "₱900/hr",
-    rating: 5.0,
-    reviews: 61,
-    verified: true,
-    initials: "JR",
-    color: "from-[#8a3220] to-[#b85239]",   /* Terracotta */
+    color: "from-[#0f1d42] to-[#1b3268]",
+    rotate: "-2deg",
+    delay: "0s",
   },
   {
     name: "Dana M.",
-    profession: "Brand Designer",
+    role: "Brand Designer",
     location: "Remote — Cebu",
-    rate: "₱750/hr",
     rating: 4.8,
-    reviews: 44,
-    verified: true,
     initials: "DM",
-    color: "from-[#8a5a0a] to-[#d4841a]",   /* Amber sunburst */
+    color: "from-[#8a5a0a] to-[#d4841a]",
+    rotate: "1.5deg",
+    delay: "1s",
   },
 ];
 
-function FreelancerCard({
-  card,
-  style,
-  className,
-}: {
-  card: (typeof MOCK_CARDS)[0];
-  style?: React.CSSProperties;
-  className?: string;
-}) {
+const RIGHT_CARDS = [
+  {
+    name: "Jasmine R.",
+    role: "Full Stack Dev",
+    location: "Mandaue City",
+    rating: 5.0,
+    initials: "JR",
+    color: "from-[#8a3220] to-[#b85239]",
+    rotate: "2deg",
+    delay: "0.5s",
+  },
+  {
+    name: "Carlo B.",
+    role: "Architect",
+    location: "Cebu City",
+    rating: 5.0,
+    initials: "CB",
+    color: "from-[#1a4a3a] to-[#2d7a5e]",
+    rotate: "-1.5deg",
+    delay: "1.4s",
+  },
+];
+
+type CardData = (typeof LEFT_CARDS)[0];
+
+function FloatingCard({ card }: { card: CardData }) {
   return (
     <div
-      style={style}
-      className={`w-72 bg-white rounded-2xl shadow-2xl shadow-lk-navy/20 p-5 border border-lk-cream-dark ${className}`}
+      className="bg-white rounded-2xl p-4 shadow-lg shadow-lk-navy/8 border border-lk-navy/6
+                 animate-[float-card_5s_ease-in-out_infinite]"
+      style={{ "--card-rotate": card.rotate, animationDelay: card.delay } as React.CSSProperties}
     >
-      <div className="flex items-start gap-3">
-        {/* Avatar */}
+      <div className="flex items-center gap-2.5 mb-2.5">
         <div
-          className={`w-12 h-12 rounded-xl bg-gradient-to-br ${card.color} flex items-center justify-center text-white font-wordmark font-bold text-base shrink-0`}
+          className={`w-9 h-9 rounded-xl bg-gradient-to-br ${card.color}
+                      flex items-center justify-center text-white font-wordmark font-bold text-xs shrink-0`}
         >
           {card.initials}
         </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-1.5">
-            <span className="font-wordmark font-semibold text-lk-navy text-sm truncate">
-              {card.name}
-            </span>
-            {card.verified && (
-              <BadgeCheck size={14} className="text-lk-gold shrink-0" />
-            )}
+        <div className="min-w-0">
+          <div className="flex items-center gap-1">
+            <span className="font-wordmark font-semibold text-lk-navy text-xs">{card.name}</span>
+            <BadgeCheck size={11} className="text-lk-gold shrink-0" />
           </div>
-          <p className="text-xs text-lk-navy/60 font-body truncate">
-            {card.profession}
-          </p>
+          <p className="font-body text-[10px] text-lk-navy/50 truncate mt-0.5">{card.role}</p>
         </div>
       </div>
-
-      <div className="mt-3 flex items-center justify-between">
-        <div className="flex items-center gap-1 text-xs text-lk-navy/50 font-body">
-          <MapPin size={11} />
-          <span className="truncate max-w-[120px]">{card.location}</span>
-        </div>
-        <span className="font-wordmark font-semibold text-xs text-lk-gold">
-          {card.rate}
-        </span>
-      </div>
-
-      <div className="mt-3 pt-3 border-t border-lk-cream-dark flex items-center gap-1">
-        <Star size={12} className="text-lk-gold fill-lk-gold" />
-        <span className="font-wordmark font-semibold text-xs text-lk-navy">
-          {card.rating}
-        </span>
-        <span className="font-body text-xs text-lk-navy/40">
-          ({card.reviews} reviews)
-        </span>
+      <div className="flex items-center gap-0.5 pt-2 border-t border-lk-cream-dark">
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            size={9}
+            className={i < Math.floor(card.rating) ? "text-lk-gold fill-lk-gold" : "text-lk-navy/15"}
+          />
+        ))}
+        <span className="font-wordmark text-[10px] text-lk-navy/40 ml-1">{card.rating}</span>
+        <span className="font-body text-[9px] text-lk-navy/30 ml-auto truncate">{card.location}</span>
       </div>
     </div>
   );
@@ -99,120 +94,102 @@ function FreelancerCard({
 
 export default function Hero() {
   return (
-    <section className="relative bg-lk-navy overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
-      {/* Background geometric accent */}
-      <div
-        className="absolute top-0 right-0 w-[600px] h-[600px] opacity-5"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(circle at center, #d4841a 0%, transparent 70%)",
-        }}
-      />
-      <div
-        className="absolute bottom-0 left-0 w-80 h-80 opacity-5"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(circle at center, #d4841a 0%, transparent 70%)",
-        }}
-      />
-
+    <section className="relative bg-lk-cream overflow-hidden pt-24 md:pt-32 pb-0">
       <div className="lk-container px-6 md:px-12 lg:px-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left: Headline + CTAs */}
-          <div className="flex flex-col items-start">
-            {/* Eyebrow badge */}
-            <div className="inline-flex items-center gap-2 bg-lk-gold/10 border border-lk-gold/30 rounded-full px-4 py-1.5 mb-8 animate-fade-up opacity-0">
-              <span className="w-1.5 h-1.5 rounded-full bg-lk-gold animate-pulse" />
-              <span className="font-wordmark text-xs font-medium text-lk-gold uppercase tracking-widest">
-                Now live in Cebu
-              </span>
-            </div>
 
-            {/* Hero headline — display font, Filipino */}
+        {/* ── Scheme1: // section label // — centered ── */}
+        <div className="flex items-center justify-center gap-2 mb-8 animate-fade-up opacity-0">
+          <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
+          <span className="font-wordmark text-[11px] font-medium text-lk-navy/40 uppercase tracking-[0.2em]">
+            The Philippine Freelance Platform
+          </span>
+          <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
+        </div>
+
+        {/* ── Scheme1: 3-col grid — left cards | center | right cards ── */}
+        <div className="grid grid-cols-1 lg:grid-cols-[220px_1fr_220px] xl:grid-cols-[255px_1fr_255px] items-center gap-6">
+
+          {/* Left floating cards */}
+          <div className="hidden lg:flex flex-col gap-4">
+            {LEFT_CARDS.map((c) => <FloatingCard key={c.name} card={c} />)}
+          </div>
+
+          {/* Center: headline + subtitle + CTAs */}
+          <div className="text-center">
             <h1
-              className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-lk-cream leading-[1.1] animate-fade-up opacity-0 animation-delay-100"
+              className="font-display font-black text-lk-navy leading-[0.9] animate-fade-up opacity-0 animation-delay-100"
+              style={{ fontSize: "clamp(3.8rem, 9vw, 7.5rem)" }}
               lang="tl"
             >
               Likha Mo,
               <br />
-              <span className="text-lk-gold italic">Henyo Mo.</span>
+              <em className="text-lk-gold" style={{ fontStyle: "italic" }}>Henyo Mo.</em>
             </h1>
 
-            {/* English subtitle */}
-            <p className="mt-6 text-lg md:text-xl text-lk-cream/70 font-body leading-relaxed max-w-lg animate-fade-up opacity-0 animation-delay-200">
+            <p
+              className="mt-6 font-body text-lk-navy/45 leading-relaxed mx-auto animate-fade-up opacity-0 animation-delay-200"
+              style={{ fontSize: "clamp(0.95rem, 1.8vw, 1.1rem)", maxWidth: "30rem" }}
+            >
               Connect with verified Filipino professionals — engineers,
-              developers, designers, and more. Post jobs or find work, all in
-              one place.
+              developers, designers, and more. Post jobs or find work,
+              all in one place.
             </p>
 
-            {/* CTAs */}
-            <div className="mt-10 flex flex-col sm:flex-row items-start gap-4 animate-fade-up opacity-0 animation-delay-300">
+            {/* Scheme1: two side-by-side pill CTAs */}
+            <div className="mt-9 flex items-center justify-center gap-3 flex-wrap animate-fade-up opacity-0 animation-delay-300">
               <Link
                 href="/signup?role=client"
-                className="lk-shimmer font-wordmark font-semibold bg-lk-gold hover:bg-lk-gold-light text-white px-7 py-3.5 rounded-lg text-base transition-all shadow-lg shadow-lk-gold/25 hover:shadow-lk-gold/40 hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 bg-lk-navy hover:bg-lk-navy-light text-lk-cream
+                           font-wordmark font-semibold text-sm px-7 py-3 rounded-full transition-all"
               >
                 Post a Job
+                <span className="text-lk-gold">↗</span>
               </Link>
               <Link
                 href="/signup?role=freelancer"
-                className="font-wordmark font-semibold border-2 border-lk-cream/30 hover:border-lk-cream/60 text-lk-cream px-7 py-3.5 rounded-lg text-base transition-all hover:-translate-y-0.5"
+                className="inline-flex items-center gap-2 border border-lk-navy/20 hover:border-lk-navy/50
+                           hover:bg-lk-navy/5 text-lk-navy font-wordmark font-semibold text-sm px-7 py-3
+                           rounded-full transition-all"
               >
-                Find Work
+                Find Work →
               </Link>
             </div>
-
-            {/* Social proof */}
-            <p className="mt-8 text-sm text-lk-cream/40 font-body animate-fade-up opacity-0 animation-delay-400">
-              Trusted by professionals across Philippines.
-            </p>
           </div>
 
-          {/* Right: Stacked freelancer profile cards */}
-          <div className="relative h-96 lg:h-[480px] hidden md:block animate-slide-in-right opacity-0 animation-delay-300">
-            {/* Card 1 — back, rotated left */}
-            <FreelancerCard
-              card={MOCK_CARDS[2]}
-              className="absolute top-8 left-4 animate-float"
-              style={
-                {
-                  transform: "rotate(-6deg)",
-                  "--card-rotate": "-6deg",
-                  animationDelay: "0s",
-                  zIndex: 1,
-                } as React.CSSProperties
-              }
-            />
-            {/* Card 2 — front center */}
-            <FreelancerCard
-              card={MOCK_CARDS[1]}
-              className="absolute top-20 left-16 animate-float"
-              style={
-                {
-                  transform: "rotate(2deg)",
-                  "--card-rotate": "2deg",
-                  animationDelay: "1.5s",
-                  zIndex: 3,
-                } as React.CSSProperties
-              }
-            />
-            {/* Card 3 — front, rotated right */}
-            <FreelancerCard
-              card={MOCK_CARDS[0]}
-              className="absolute top-40 left-32 animate-float"
-              style={
-                {
-                  transform: "rotate(-3deg)",
-                  "--card-rotate": "-3deg",
-                  animationDelay: "0.8s",
-                  zIndex: 2,
-                } as React.CSSProperties
-              }
-            />
+          {/* Right floating cards */}
+          <div className="hidden lg:flex flex-col gap-4">
+            {RIGHT_CARDS.map((c) => <FloatingCard key={c.name} card={c} />)}
           </div>
         </div>
+
+        {/* Mobile: 2 cards below headline */}
+        <div className="lg:hidden mt-8 grid grid-cols-2 gap-3">
+          <FloatingCard card={LEFT_CARDS[0]} />
+          <FloatingCard card={RIGHT_CARDS[0]} />
+        </div>
+
+        {/* ── Scheme1 trust bar — replaces logo strip ── */}
+        <div className="mt-14 py-6 border-t border-lk-navy/8 animate-fade-up opacity-0 animation-delay-400">
+          <div className="flex items-center justify-center flex-wrap gap-3">
+            {["Any Profession", "100% Verified", "₱0 Platform Fee", "Starting in Cebu"].map(
+              (label, i, arr) => (
+                <span key={label} className="flex items-center gap-3">
+                  <span className="font-wordmark text-[11px] font-medium text-lk-navy/30 uppercase tracking-widest">
+                    {label}
+                  </span>
+                  {i < arr.length - 1 && (
+                    <span className="w-1 h-1 rounded-full bg-lk-navy/15" aria-hidden="true" />
+                  )}
+                </span>
+              )
+            )}
+          </div>
+        </div>
+
       </div>
+
+      {/* Bottom section divider */}
+      <div className="border-t border-lk-navy/8" />
     </section>
   );
 }

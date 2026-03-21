@@ -19,12 +19,11 @@ export default function ForThePhilippines() {
       <div className="h-px bg-gradient-to-r from-transparent via-lk-gold/40 via-50% to-lk-terra/30" />
 
       <div className="lk-container px-6 md:px-12 lg:px-20 py-28 relative text-center">
-        {/* Eyebrow */}
-        <div className="inline-flex items-center gap-2 bg-lk-terra/10 border border-lk-terra/25 rounded-full px-4 py-1.5 mb-8">
-          <span className="w-1.5 h-1.5 rounded-full bg-lk-terra-light" />
-          <span className="font-wordmark text-xs font-medium text-lk-terra-light uppercase tracking-widest">
-            Made in the Philippines
-          </span>
+        {/* Scheme1: // label // */}
+        <div className="flex items-center justify-center gap-2 mb-8">
+          <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
+          <span className="font-wordmark text-xs font-medium text-white/35 uppercase tracking-[0.18em]">Made in the Philippines</span>
+          <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
         </div>
 
         {/* Filipino tagline — Fraunces in italic black */}

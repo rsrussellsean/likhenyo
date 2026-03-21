@@ -116,6 +116,11 @@ export default function HowItWorks() {
       <div className="lk-container">
         {/* Header */}
         <div className="text-center mb-14">
+          <div className="flex items-center justify-center gap-2 mb-5">
+            <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
+            <span className="font-wordmark text-xs font-medium text-lk-navy/40 uppercase tracking-[0.18em]">How It Works</span>
+            <span className="font-display italic text-lk-gold text-sm leading-none">//</span>
+          </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-lk-navy">
             Simple.{" "}
             <span className="italic text-lk-gold">Structured.</span>{" "}

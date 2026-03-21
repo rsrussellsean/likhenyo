@@ -28,7 +28,7 @@ export default function Header() {
     const { data: listener } = supabase.auth.onAuthStateChange(
       (_event, session) => {
         setUser(session?.user ?? null);
-      }
+      },
     );
 
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -44,8 +44,8 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-lk-navy/95 backdrop-blur-md shadow-lg shadow-lk-navy/20"
-          : "bg-lk-navy"
+          ? "bg-[#171717]/95 backdrop-blur-md shadow-lg shadow-[#171717]/20"
+          : "bg-[#171717]"
       }`}
     >
       <div className="lk-container">
@@ -55,8 +55,10 @@ export default function Header() {
             href="/"
             className="font-wordmark font-bold text-2xl text-lk-cream tracking-tight group flex items-center gap-1"
           >
-            <span className="text-lk-gold group-hover:text-lk-gold-light transition-colors">L</span>
-            <span>ikhenyo</span>
+            <span className="text-lk-gold group-hover:text-lk-gold-light transition-colors">
+              Lik
+            </span>
+            <span>henyo</span>
           </Link>
 
           {/* Desktop Nav */}
