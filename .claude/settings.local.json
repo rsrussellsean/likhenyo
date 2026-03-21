@@ -10,7 +10,11 @@
       "Bash(mkdir -p \"D:/Projects/likhenyo/likhenyo/public/images\")",
       "Bash(cp \"D:/Projects/likhenyo/likhenyo/design/images/Filipino_agree.jpg\" \"D:/Projects/likhenyo/likhenyo/public/images/\")",
       "Bash(cp \"D:/Projects/likhenyo/likhenyo/design/images/Filipino_teamwork.jpg\" \"D:/Projects/likhenyo/likhenyo/public/images/\")",
-      "Bash(cp \"D:/Projects/likhenyo/likhenyo/design/images/Filipino_meeting_client.jpg\" \"D:/Projects/likhenyo/likhenyo/public/images/\")"
+      "Bash(cp \"D:/Projects/likhenyo/likhenyo/design/images/Filipino_meeting_client.jpg\" \"D:/Projects/likhenyo/likhenyo/public/images/\")",
+      "mcp__supabase__list_migrations",
+      "mcp__supabase__list_tables",
+      "mcp__supabase__apply_migration",
+      "mcp__supabase__execute_sql"
     ]
   },
   "enableAllProjectMcpServers": true,

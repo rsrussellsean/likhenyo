@@ -414,11 +414,13 @@ before reaching any part of the marketplace.
 </signup_flow>
 
 <current_task>
-@PHASE_0.md
+@PHASE_2.md
 </current_task>
 
 <output_rules>
 For every task:
+
+USE senior-fullstack skills for creating the frontend and backend and use frontend-design plugin skill for designing the webpages.
 
 1. List all files you will create or modify before writing any code.
 2. Write complete, working code — no placeholders, no TODOs.
