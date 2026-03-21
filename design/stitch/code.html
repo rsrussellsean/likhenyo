@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>LikHenyo | Likha Mo, Henyo Mo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed": "#001452",
+                        "inverse-surface": "#2d3133",
+                        "on-background": "#191c1e",
+                        "inverse-primary": "#b7c4ff",
+                        "secondary": "#bb0012",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#4f3e00",
+                        "primary": "#0048e1",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "primary-fixed": "#dde1ff",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#3063ff",
+                        "outline-variant": "#c2c6d8",
+                        "background": "#f7f9fb",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-variant": "#e0e3e5",
+                        "tertiary-container": "#d0a700",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#0038b6",
+                        "error": "#ba1a1a",
+                        "on-primary-container": "#f9f7ff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#fffbff",
+                        "surface-dim": "#d8dadc",
+                        "tertiary": "#735c00",
+                        "surface-tint": "#004ced",
+                        "surface-bright": "#f7f9fb",
+                        "on-surface-variant": "#424656",
+                        "secondary-fixed-dim": "#ffb4ab",
+                        "surface-container-high": "#e6e8ea",
+                        "primary-fixed-dim": "#b7c4ff",
+                        "outline": "#727687",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#f0c100",
+                        "secondary-container": "#e32225",
+                        "on-secondary-fixed-variant": "#93000c",
+                        "surface": "#f7f9fb",
+                        "secondary-fixed": "#ffdad6",
+                        "surface-container": "#eceef0",
+                        "tertiary-fixed": "#ffe089",
+                        "on-tertiary-fixed": "#241a00",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-secondary-fixed": "#410002"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #dde1ff 0%, #f7f9fb 60%);
+        }
+        .ghost-border {
+            border: 1px solid rgba(194, 198, 216, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-lg shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-7xl mx-auto">
+<div class="text-2xl font-black text-blue-700 tracking-tighter font-headline">LikHenyo</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-blue-700 font-bold border-b-2 border-blue-600 font-label uppercase tracking-wider text-xs" href="#">About Us</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors font-label uppercase tracking-wider text-xs" href="#">Our Professionals</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors font-label uppercase tracking-wider text-xs" href="#">How it works</a>
+<a class="text-slate-600 hover:text-blue-600 transition-colors font-label uppercase tracking-wider text-xs" href="#">Why LikHenyo</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-600 hover:text-blue-600 transition-colors font-medium px-4 py-2">Sign In</button>
+<button class="bg-primary hover:opacity-80 transition-opacity text-on-primary px-6 py-2.5 rounded-full font-bold scale-95 active:scale-90 transition-transform">Join as Talent</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<header class="pt-32 pb-20 px-8 hero-gradient">
+<div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+<div class="space-y-8">
+<div class="inline-block px-4 py-1.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label text-xs uppercase tracking-widest font-bold">
+                    Likha Mo, Henyo Mo
+                </div>
+<h1 class="font-headline text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.1] text-on-background">
+                    Hire World-Class <span class="text-primary">Filipino Genius</span> for Your Next Big Project.
+                </h1>
+<p class="text-on-surface-variant text-xl max-w-lg leading-relaxed">
+                    Connect with the top 1% of Filipino freelancers across tech, creative, and administrative industries. Precision meets passion.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="bg-primary text-on-primary px-8 py-4 rounded-full font-bold text-lg shadow-xl shadow-primary/20 hover:scale-105 transition-transform">Hire Now</button>
+<button class="bg-white ghost-border text-on-surface px-8 py-4 rounded-full font-bold text-lg hover:bg-surface-container-low transition-colors">Explore Talent</button>
+</div>
+</div>
+<div class="relative">
+<div class="aspect-square rounded-3xl overflow-hidden shadow-2xl relative z-10">
+<img class="w-full h-full object-cover" data-alt="Confident Filipino professional woman smiling in modern office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpjjbgzJN9N3nB3fyYEXpQ-KO7ZnOKobEwta98gWOsDytN2yraSy_qWX6wsnLio9mMmgMy4J9af5_i4Zp2LPoTPZf8a5PuOVpf6U9YQx_OACjJUeAO7TfGoDQsKvBTjrwkjxOi4sQ69fp7A8e0d3PtN4rTeKpcuRGNHyIEfOLJwYgglxjUSY-JkXwCTKxcwtKbwC2ao9sfOzdEW1bRDT4iP-yzL3Dnj8zUboqmfaOzZBlEqtSIEg5X02jaLBQGjz3ujbMIKz0x0ZwH"/>
+</div>
+<!-- Glass Decorative Elements -->
+<div class="absolute -bottom-6 -left-6 glass-card p-6 rounded-2xl shadow-xl z-20 border border-white/40">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">Expert Vetted</p>
+<p class="text-sm text-on-surface-variant">Top 1% Talent Only</p>
+</div>
+</div>
+</div>
+<div class="absolute -top-6 -right-6 glass-card p-6 rounded-2xl shadow-xl z-0 border border-white/40 hidden md:block">
+<p class="text-xs font-bold text-primary uppercase mb-2">Live Demand</p>
+<div class="flex -space-x-3">
+<div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover" data-alt="User profile avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKYHHV6R3Eo5KFEyZ42IXmZP1npfAyfZXJUq--kwuWppZNwkMRqiSGpUxQI3ypMAqIYzJSHFJckhey6R9I97cxovDM3gkfY33xSZaNqjW8acOZa7MPOOhuA3UVr-vtt-8S81yvuEUcHRnREgtmRw3QZv4m6Ro7u99USn_z0_fRJxSMZyuSYXUe2I00EyeEQh0g6uVr8JkaLTk0Ki2h2uGOr65Q33f_iCfxLRtF07J7o1ZABz1_A4QE4igRjAvobKGEe3g33apq7vgA"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover" data-alt="User profile avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRgMQZfrO0n0fXdssCBOoS_x2b9W51ghgbP1wtUtbzWVmDwztL9WT20bVAALZVEBGFCDMa1gLJ6mpPL7guO00QhdPOBBvjy2GrRuJqrYHDSyRSPbfQpIGm86oDnIF1jfxJPMtMJXqo-BZyTgIH5KBe5nKGyuDD9VGl8q448w2pa1YnBUY8frE-BRt1q-GLkzXQC3_WvPOXyW47SNShJEiGdEfFUltFzgdN5afFeOM44lvYmOjRty_EDe_auH6JIInE6LirnJolQJvr"/>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-white bg-primary text-white text-xs flex items-center justify-center font-bold">
+                            +12k
+                        </div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- By the Numbers -->
+<section class="py-12 bg-surface-container-low">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+<div class="text-center">
+<p class="text-4xl font-black text-primary font-headline">50k+</p>
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-widest mt-2">Freelancers</p>
+</div>
+<div class="text-center">
+<p class="text-4xl font-black text-primary font-headline">10k+</p>
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-widest mt-2">Projects Completed</p>
+</div>
+<div class="text-center">
+<p class="text-4xl font-black text-primary font-headline">4.9/5</p>
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-widest mt-2">Average Rating</p>
+</div>
+<div class="text-center">
+<p class="text-4xl font-black text-primary font-headline">100%</p>
+<p class="text-on-surface-variant font-label text-xs uppercase tracking-widest mt-2">Payment Secure</p>
+</div>
+</div>
+</div>
+</section>
+<!-- How It Works -->
+<section class="py-24 px-8">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-16 space-y-4">
+<h2 class="font-headline text-4xl font-extrabold text-on-background">Your Journey to Success</h2>
+<p class="text-on-surface-variant max-w-xl mx-auto">Streamlined hiring process designed for modern business needs.</p>
+</div>
+<div class="grid md:grid-cols-3 gap-12 relative">
+<!-- Step 1 -->
+<div class="flex flex-col items-center text-center space-y-6">
+<div class="w-20 h-20 rounded-2xl bg-primary-fixed flex items-center justify-center text-primary-container shadow-inner">
+<span class="material-symbols-outlined text-4xl">person_add</span>
+</div>
+<h3 class="font-headline text-xl font-bold">Register</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Create your account in minutes. Gain access to a curated pool of Filipino talent ready to build with you.</p>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-col items-center text-center space-y-6">
+<div class="w-20 h-20 rounded-2xl bg-tertiary-fixed flex items-center justify-center text-tertiary shadow-inner">
+<span class="material-symbols-outlined text-4xl">post_add</span>
+</div>
+<h3 class="font-headline text-xl font-bold">Post Job</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Specify your needs. From short-term tasks to long-term partnerships, our platform finds the perfect match.</p>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-col items-center text-center space-y-6">
+<div class="w-20 h-20 rounded-2xl bg-secondary-fixed flex items-center justify-center text-secondary shadow-inner">
+<span class="material-symbols-outlined text-4xl">handshake</span>
+</div>
+<h3 class="font-headline text-xl font-bold">Hire</h3>
+<p class="text-on-surface-variant text-sm leading-relaxed">Interview top candidates, agree on terms, and start collaborating. Fast, easy, and secure.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Our Professions (Bento Grid) -->
+<section class="py-24 px-8 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto">
+<div class="flex justify-between items-end mb-16">
+<div class="space-y-4">
+<h2 class="font-headline text-4xl font-extrabold text-on-background">Discover Expertise</h2>
+<p class="text-on-surface-variant">Top categories currently in high demand.</p>
+</div>
+<button class="text-primary font-bold hover:underline flex items-center gap-2">
+                    See All Categories <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<!-- Large Card -->
+<div class="md:col-span-2 md:row-span-2 group relative overflow-hidden rounded-3xl bg-primary-container p-8 text-on-primary-container flex flex-col justify-between aspect-square md:aspect-auto">
+<div class="z-10">
+<div class="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-3xl">code</span>
+</div>
+<h3 class="text-3xl font-black font-headline mb-4 leading-tight">Full-Stack<br/>Development</h3>
+<p class="opacity-80 max-w-xs">Custom apps, API integrations, and scalable web solutions.</p>
+</div>
+<img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-110 transition-transform duration-700" data-alt="Software code on a laptop screen with blue neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOGK0y55gZ847vxPECM0ffTeG6yEPST-JQwrd4Yhe6cE1w4wJffY-k_7YaHxGVJ67UJlHYXEi3kItbCYji-gUBTtHzjAcqQgedErk1H4aZjmqhxctSMZEfwKhlA8MJMULfc7OPmYztNXaWLwx9jdRgfJT7ndm6pBnQa_gtb21EXZ_mJuUGBEaQ-boF7L9dhWPseLH5zVNAlcAVpANzS1pV9RGSW3TmaSmt3CfNq-byFViNciAF-sXAAsU8AHPXvNQwtY1eFTqSrbN5"/>
+<div class="z-10 mt-8">
+<button class="bg-white text-primary px-6 py-2 rounded-full font-bold text-sm">Browse 4.2k+ Devs</button>
+</div>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-high rounded-3xl p-8 hover:shadow-xl transition-all border border-transparent hover:border-primary/10">
+<div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center mb-4 text-primary shadow-sm">
+<span class="material-symbols-outlined">brush</span>
+</div>
+<h3 class="text-xl font-bold font-headline mb-2">Web Design</h3>
+<p class="text-sm text-on-surface-variant">UI/UX, Graphic Design, &amp; Brand Identity</p>
+</div>
+<!-- Category Card -->
+<div class="bg-surface-container-high rounded-3xl p-8 hover:shadow-xl transition-all border border-transparent hover:border-primary/10">
+<div class="w-10 h-10 rounded-lg bg-white flex items-center justify-center mb-4 text-primary shadow-sm">
+<span class="material-symbols-outlined">support_agent</span>
+</div>
+<h3 class="text-xl font-bold font-headline mb-2">Virtual Assistant</h3>
+<p class="text-sm text-on-surface-variant">Admin, CS, &amp; Data Management</p>
+</div>
+<!-- Medium Card -->
+<div class="md:col-span-2 bg-tertiary-container/10 border border-tertiary-container/20 rounded-3xl p-8 flex items-center gap-8 group">
+<div class="flex-1">
+<h3 class="text-2xl font-black font-headline mb-2 text-tertiary">Content Creation</h3>
+<p class="text-on-surface-variant text-sm mb-4">Copywriting, Video Editing, &amp; Social Media Marketing</p>
+<button class="text-tertiary font-bold flex items-center gap-2 group-hover:translate-x-2 transition-transform">
+                            View Creators <span class="material-symbols-outlined">east</span>
+</button>
+</div>
+<div class="w-24 h-24 rounded-2xl overflow-hidden hidden sm:block">
+<img class="w-full h-full object-cover" data-alt="Creative team collaborating in a bright workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKh2UqiHMNdQrrglxmvOJ6YAMQEZJQMbYQxxEbQkYcsqb0TIse1er0Swq1zuN_yPFZAKmHx6L0iHjUwH-x0pRSC2sK-RYUUqkZrZPex3BBp-7KJHSZeGmAlCDekSTPTSlZ6WX96m77gzO90cmnLvGexZgnZhpjgUSHVTHjcICKR9TgpuUar0dr6RHIB8usOVABudMZPcvMPK4w1h2gnXEmW7ykAUlr6QQua7Iw8E45ZGO8Kc63jX3NOCOvLxVUU9ygtxWYvwwdkNA_"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Why Likhenyo -->
+<section class="py-24 px-8 bg-surface-container-low overflow-hidden relative">
+<!-- Abstract Background Shape -->
+<div class="absolute -top-40 -right-40 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+<div class="grid lg:grid-cols-2 gap-20 items-center">
+<div class="space-y-8">
+<h2 class="font-headline text-5xl font-extrabold text-on-background leading-tight">The Filipino Talent Advantage</h2>
+<p class="text-lg text-on-surface-variant">Why global startups and enterprises choose LikHenyo for their scaling needs.</p>
+<div class="space-y-10">
+<!-- Benefit 1 -->
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+</div>
+<div>
+<h4 class="font-headline text-xl font-bold mb-2">Expert Vetted</h4>
+<p class="text-on-surface-variant">Every freelancer passes a rigorous identity and skill verification process before they can apply for jobs.</p>
+</div>
+</div>
+<!-- Benefit 2 -->
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<div>
+<h4 class="font-headline text-xl font-bold mb-2">Affordable Excellence</h4>
+<p class="text-on-surface-variant">Get premium quality work at a fraction of local hiring costs, thanks to the lower cost of living in the Philippines.</p>
+</div>
+</div>
+<!-- Benefit 3 -->
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-14 h-14 rounded-full bg-white shadow-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">bolt</span>
+</div>
+<div>
+<h4 class="font-headline text-xl font-bold mb-2">Reliable &amp; Resilient</h4>
+<p class="text-on-surface-variant">Known for their work ethic and cultural adaptability, Filipino talent provides the stability your project needs.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="relative hidden lg:block">
+<div class="aspect-[4/5] rounded-[3rem] overflow-hidden rotate-3 shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="Group of young Filipino professionals collaborating around a laptop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkF47DT2nx7AIoPprUezUvsbB8nTtC0r7FRYM43ih40ev68x8m-5HRrIz8DQNzOS3lY6WrOakY4B_WNKFq5_4EENBmDxRA6Opx1cT_9l4pJ0rcc0mLcBeDMQSgnZRDBAVKxjr3L5BgSXFPmAU7GVrDjlsuT9_qd_wnJ4wzKvstdBsVXml1T5-fY9V_ysJ1Kchra8O_fFaJnQxbJGh9hNSudDMNfWdw-g5l6ocf9RccJye7pCDekS7wfT5ohH2P7XIaZbT1DuKeWNPQ"/>
+</div>
+<div class="absolute -bottom-10 -left-10 glass-card p-8 rounded-3xl border border-white/40 shadow-2xl -rotate-3">
+<div class="text-primary text-5xl font-black font-headline">98%</div>
+<p class="text-on-surface-variant font-bold">Client Retention</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Testimonials -->
+<section class="py-24 px-8">
+<div class="max-w-7xl mx-auto">
+<h2 class="font-headline text-4xl font-extrabold text-center mb-16">What Our Clients Say</h2>
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Testimonial 1 -->
+<div class="glass-card p-8 rounded-3xl border border-outline-variant/20 hover:scale-[1.02] transition-transform">
+<div class="flex items-center gap-1 text-tertiary-container mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface-variant italic mb-8 leading-relaxed">"LikHenyo helped us find a lead developer in 48 hours. The quality of work and communication from the Filipino team has been exceptional."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover" data-alt="David Miller, CEO of TechFlow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_X-AWXE6z3fvzU0twUsKPJGiDBb-KdITUadFg5RrzER0TCw1HZrpXvUyJyx6g6YdphGJDejs5hlFp_WPWFVQMrXDWjMtXMo_vDEQdK9JMwo4KM0bxRdnPeMOrwVwAL8p5WXCbYS6-Qum2hwMb2blG5vNX2Qz2Q2xo9-NiQaw28wFrPvoru4nV9vsazgLEMYrjir3TmP8tjk3UiEGNWccnamLRiEo8RsnUFT33YAPVO8lUIIakrICzGcXoTNQonQEa6TqRep-UdyLM"/>
+</div>
+<div>
+<p class="font-bold">David Miller</p>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">CEO, TechFlow</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="glass-card p-8 rounded-3xl border border-outline-variant/20 hover:scale-[1.02] transition-transform">
+<div class="flex items-center gap-1 text-tertiary-container mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star_half</span>
+</div>
+<p class="text-on-surface-variant italic mb-8 leading-relaxed">"The VA we hired via LikHenyo has become indispensable to our operations. Professional, hardworking, and always ahead of the curve."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover" data-alt="Sarah Jenkins, Founder of Bloom Lab" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOfrLMaYecBv0CSGQoiW2YS0A-l0LmenlQ_MJbJpNsxhMg7fpF_-_JKswnSGlnNaTZY3htcaHiH7tFBtFkwO8bsfMg_cMljgGNPqa-Gn9XJD-9T8emB6fli488pin_RHUygJqouKyD6JvIViq6wLAL3N1Yrs6AyMqyo3LNtU0KBxAvYJ8ivRu7xnqCAvcAXS6UgqOcv9amnsdQEhF1b4ShHu3yxAj7dDdsBSE3zAsWIKbHD_bysOPeEozNI7TzFcvnllXhMizsn2pf"/>
+</div>
+<div>
+<p class="font-bold">Sarah Jenkins</p>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Founder, Bloom Lab</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="glass-card p-8 rounded-3xl border border-outline-variant/20 hover:scale-[1.02] transition-transform">
+<div class="flex items-center gap-1 text-tertiary-container mb-6">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="text-on-surface-variant italic mb-8 leading-relaxed">"The best decision we made for our marketing agency. The content creators here are true 'Henyos' who understand the global market."</p>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+<img class="w-full h-full object-cover" data-alt="Markus T., Creative Director" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx4vgPhaApgxTPE4LWIrNCVQSlXc_RLF-f1wHRt0tzDI9IE1_igrVA_rU5ZtK0WTdWFUXlYQasdNfKVL9eXTGBu_OnIZHVhYC1x5hj0n97yO1QRSXn77QBqXJtWXsEI9RXhXecx7-zXNCpx_l_kibms2Vh1_4chiZyyyBw4JCI-iS4E4-LHtYRaNxC-WAa_e4PMava9kBkcKxjYVt9H4dgD2fmJOI2pvSMEGWbbI7w0mMTNG5VL6NhmGdyFifCCBQfCGOTgIcsUpA6"/>
+</div>
+<div>
+<p class="font-bold">Markus Thorne</p>
+<p class="text-xs text-on-surface-variant uppercase tracking-widest">Creative Director</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Closing CTA -->
+<section class="py-24 px-8">
+<div class="max-w-5xl mx-auto rounded-[3rem] bg-gradient-to-br from-primary to-primary-container p-16 text-center text-on-primary shadow-2xl relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+<svg height="100%" preserveaspectratio="none" viewbox="0 0 100 100" width="100%">
+<path d="M0 100 C 20 0 50 0 100 100 Z" fill="white"></path>
+</svg>
+</div>
+<div class="relative z-10 space-y-8">
+<h2 class="font-headline text-5xl font-extrabold leading-tight">Start Your Journey with LikHenyo</h2>
+<p class="text-xl opacity-90 max-w-2xl mx-auto">Join thousands of companies leveraging the power of Filipino talent. Your next 'Henyo' is just a click away.</p>
+<div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center">
+<button class="bg-white text-primary px-10 py-5 rounded-full font-bold text-xl hover:scale-105 transition-transform">Get Started Today</button>
+<button class="bg-primary-container border-2 border-white/30 text-white px-10 py-5 rounded-full font-bold text-xl hover:bg-white/10 transition-colors">Schedule a Demo</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full rounded-t-3xl mt-20 bg-slate-50">
+<div class="flex flex-col md:flex-row justify-between items-start p-12 max-w-7xl mx-auto">
+<div class="mb-8 md:mb-0">
+<div class="text-xl font-bold text-blue-800 tracking-tight font-headline mb-4">LikHenyo</div>
+<p class="text-slate-500 max-w-xs text-sm font-body">Connecting global opportunities with Filipino talent through innovation and trust.</p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 gap-12">
+<div class="flex flex-col gap-3">
+<span class="text-slate-400 font-label text-[10px] uppercase tracking-widest font-bold">Platform</span>
+<a class="text-slate-500 hover:text-blue-500 hover:translate-x-1 transition-transform text-sm" href="#">Our Professionals</a>
+<a class="text-slate-500 hover:text-blue-500 hover:translate-x-1 transition-transform text-sm" href="#">How it works</a>
+<a class="text-slate-500 hover:text-blue-500 hover:translate-x-1 transition-transform text-sm" href="#">Why LikHenyo</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-slate-400 font-label text-[10px] uppercase tracking-widest font-bold">Company</span>
+<a class="text-slate-500 hover:text-blue-500 hover:translate-x-1 transition-transform text-sm" href="#">Contact Us</a>
+<a class="text-slate-500 hover:text-blue-500 hover:translate-x-1 transition-transform text-sm" href="#">Help Center</a>
+<a class="text-slate-500 hover:text-blue-500 hover:translate-x-1 transition-transform text-sm" href="#">Careers</a>
+</div>
+<div class="flex flex-col gap-3">
+<span class="text-slate-400 font-label text-[10px] uppercase tracking-widest font-bold">Legal</span>
+<a class="text-slate-500 hover:text-blue-500 hover:translate-x-1 transition-transform text-sm" href="#">Privacy Policy</a>
+<a class="text-slate-500 hover:text-blue-500 hover:translate-x-1 transition-transform text-sm" href="#">Terms of Service</a>
+</div>
+</div>
+</div>
+<div class="border-t border-slate-200/60 p-8 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-slate-500 text-sm font-body font-light">© 2024 LikHenyo. Proudly Filipino Made.</p>
+<div class="flex gap-6">
+<a class="text-slate-500 hover:text-blue-500 opacity-80 hover:opacity-100 transition-opacity" href="#">Facebook</a>
+<a class="text-slate-500 hover:text-blue-500 opacity-80 hover:opacity-100 transition-opacity" href="#">LinkedIn</a>
+<a class="text-slate-500 hover:text-blue-500 opacity-80 hover:opacity-100 transition-opacity" href="#">Instagram</a>
+</div>
+</div>
+</footer>
+</body></html>

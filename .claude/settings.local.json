@@ -2,7 +2,15 @@
   "permissions": {
     "allow": [
       "Bash(npx:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Read(//d/Projects/likhenyo/**)",
+      "Read(//c/Users/Russell/**)",
+      "mcp__stitch__list_projects",
+      "Bash(mkdir -p \"D:/Projects/likhenyo/likhenyo/public/images\")",
+      "Bash(cp \"D:/Projects/likhenyo/likhenyo/design/images/Filipino_agree.jpg\" \"D:/Projects/likhenyo/likhenyo/public/images/\")",
+      "Bash(cp \"D:/Projects/likhenyo/likhenyo/design/images/Filipino_teamwork.jpg\" \"D:/Projects/likhenyo/likhenyo/public/images/\")",
+      "Bash(cp \"D:/Projects/likhenyo/likhenyo/design/images/Filipino_meeting_client.jpg\" \"D:/Projects/likhenyo/likhenyo/public/images/\")"
     ]
   },
   "enableAllProjectMcpServers": true,
