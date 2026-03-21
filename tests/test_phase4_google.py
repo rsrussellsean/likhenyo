@@ -38,9 +38,25 @@ REPORTS  = Path(__file__).parent / "reports"
 SHOTS.mkdir(parents=True, exist_ok=True)
 REPORTS.mkdir(parents=True, exist_ok=True)
 
-# Optional env-var auto-fill credentials
-GOOGLE_EMAIL    = os.getenv("GOOGLE_EMAIL", "")
-GOOGLE_PASSWORD = os.getenv("GOOGLE_PASSWORD", "")
+
+def _load_env() -> dict:
+    """Load key=value pairs from .env.local in the project root."""
+    env: dict = {}
+    env_file = ROOT / ".env.local"
+    if env_file.exists():
+        for line in env_file.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                k, _, v = line.partition("=")
+                env[k.strip()] = v.strip().strip('"').strip("'")
+    return env
+
+
+_env = _load_env()
+
+# Credentials — .env.local first, then shell env vars, then empty
+GOOGLE_EMAIL    = _env.get("GOOGLE_EMAIL")    or os.getenv("GOOGLE_EMAIL",    "")
+GOOGLE_PASSWORD = _env.get("GOOGLE_PASSWORD") or os.getenv("GOOGLE_PASSWORD", "")
 
 results: list[tuple[bool, str, str]] = []
 _counter = [0]
