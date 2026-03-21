@@ -1,5 +1,6 @@
 import Header from "@/components/landing/Header";
 import Hero from "@/components/landing/Hero";
+import BelowHero from "@/components/landing/BelowHero";
 import HowItWorks from "@/components/landing/HowItWorks";
 import ProfessionGrid from "@/components/landing/ProfessionGrid";
 import WhyLikhenyo from "@/components/landing/WhyLikhenyo";
@@ -14,6 +15,7 @@ export default function HomePage() {
       <Header />
       <main>
         <Hero />
+        <BelowHero />
         <HowItWorks />
         <ProfessionGrid />
         <WhyLikhenyo />
