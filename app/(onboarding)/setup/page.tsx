@@ -186,9 +186,15 @@ export default function SetupPage() {
     const supabase = createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
-    await supabase
+    const { error } = await supabase
       .from("profiles")
-      .update({
+      .upsert({
+        id: user.id,
+        full_name:
+          user.user_metadata?.full_name ??
+          user.email?.split("@")[0] ??
+          "User",
+        verified_status: "unverified",
         role,
         ...(role === "freelancer"
           ? {
@@ -198,8 +204,12 @@ export default function SetupPage() {
               location: location || null,
             }
           : {}),
-      })
-      .eq("id", user.id);
+      });
+    if (error) {
+      console.error("Setup upsert error:", error.message);
+      setLoading(false);
+      return;
+    }
     router.replace("/dashboard");
   }
 

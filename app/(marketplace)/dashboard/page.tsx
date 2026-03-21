@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Plus, ArrowRight, Briefcase } from "lucide-react";
+import { Plus, ArrowRight, Briefcase, UserCircle, Pencil } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import JobCard from "@/components/marketplace/JobCard";
 import type { Job } from "@/types/database";
@@ -198,6 +198,27 @@ export default async function DashboardPage() {
               className="inline-flex items-center gap-1 font-inter text-sm font-semibold text-lk-primary hover:text-lk-primary-dark transition-colors"
             >
               View all <ArrowRight size={14} />
+            </Link>
+          </div>
+
+          {/* Profile quick links */}
+          <h2 className="font-headline font-semibold text-lk-dark text-lg">My Profile</h2>
+          <div className="bg-white rounded-2xl border border-lk-neutral-mid divide-y divide-lk-neutral-mid">
+            <Link
+              href={`/freelancers/${user.id}`}
+              className="flex items-center gap-3 px-5 py-3.5 hover:bg-lk-neutral transition-colors rounded-t-2xl"
+            >
+              <UserCircle size={16} className="text-lk-primary shrink-0" />
+              <span className="font-inter text-sm font-medium text-lk-dark">My Public Profile</span>
+              <ArrowRight size={13} className="ml-auto text-lk-dark/30" />
+            </Link>
+            <Link
+              href="/profile/edit"
+              className="flex items-center gap-3 px-5 py-3.5 hover:bg-lk-neutral transition-colors rounded-b-2xl"
+            >
+              <Pencil size={16} className="text-lk-primary shrink-0" />
+              <span className="font-inter text-sm font-medium text-lk-dark">Edit My Profile</span>
+              <ArrowRight size={13} className="ml-auto text-lk-dark/30" />
             </Link>
           </div>
         </div>

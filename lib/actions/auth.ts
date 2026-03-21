@@ -90,6 +90,90 @@ export async function signOutAction() {
   redirect("/");
 }
 
+export async function updateFullProfileAction(
+  formData: FormData
+): Promise<{ error: string } | never> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) return { error: "Not authenticated" };
+
+  const { data: currentProfile } = await supabase
+    .from("profiles")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  const full_name = (formData.get("full_name") as string)?.trim();
+  if (!full_name) return { error: "Full name is required" };
+
+  const bio           = (formData.get("bio") as string)?.trim() || null;
+  const location      = (formData.get("location") as string)?.trim() || null;
+  const profession    = (formData.get("profession") as string)?.trim() || null;
+  const skills_raw    = formData.get("skills") as string;
+  const work_pref     = (formData.get("work_preference") as string) || null;
+  const rate_min_raw  = formData.get("hourly_rate_min") as string;
+  const rate_max_raw  = formData.get("hourly_rate_max") as string;
+  const avatarFile    = formData.get("avatar") as File | null;
+
+  // Avatar upload
+  let avatar_url: string | undefined;
+  if (avatarFile && avatarFile.size > 0) {
+    const buffer = await avatarFile.arrayBuffer();
+    const { error: uploadError } = await supabase.storage
+      .from("avatars")
+      .upload(`${user.id}/avatar`, buffer, {
+        contentType: avatarFile.type,
+        upsert: true,
+      });
+    if (!uploadError) {
+      const { data: urlData } = supabase.storage
+        .from("avatars")
+        .getPublicUrl(`${user.id}/avatar`);
+      avatar_url = urlData.publicUrl;
+    }
+  }
+
+  // Skills — stored as JSON string from client
+  const skillsParsed: string[] | null = (() => {
+    try {
+      const parsed = JSON.parse(skills_raw ?? "[]");
+      return Array.isArray(parsed) && parsed.length > 0 ? parsed : null;
+    } catch {
+      return null;
+    }
+  })();
+
+  const updateData: Record<string, unknown> = { full_name, bio, location };
+
+  if (currentProfile?.role === "freelancer") {
+    updateData.profession      = profession;
+    updateData.skills          = skillsParsed;
+    updateData.work_preference = work_pref;
+    updateData.hourly_rate_min = rate_min_raw ? Number(rate_min_raw) : null;
+    updateData.hourly_rate_max = rate_max_raw ? Number(rate_max_raw) : null;
+  }
+
+  if (avatar_url) updateData.avatar_url = avatar_url;
+
+  const { error } = await supabase
+    .from("profiles")
+    .update(updateData)
+    .eq("id", user.id);
+
+  if (error) return { error: error.message };
+
+  const target =
+    currentProfile?.role === "freelancer"
+      ? `/freelancers/${user.id}`
+      : "/dashboard";
+
+  redirect(target);
+}
+
 export async function updateProfileAction(data: {
   role: "client" | "freelancer";
   profession?: string | null;
