@@ -11,18 +11,63 @@ const TRUST_ITEMS = [
 
 export default function Hero() {
   return (
-    <section className="relative bg-white overflow-hidden pt-16">
-      {/* Radial glow — top-left corner tint */}
+    <section className="relative overflow-hidden pt-16" style={{ background: "#ffffff" }}>
+
+      {/* ── Layered atmospheric background ── */}
+
+      {/* Base diagonal gradient wash */}
       <div
         className="absolute inset-0 pointer-events-none"
         aria-hidden="true"
         style={{
           background:
-            "radial-gradient(ellipse 60% 50% at 0% 0%, rgba(0,82,255,0.06) 0%, transparent 70%)",
+            "linear-gradient(135deg, #EBF0FF 0%, #ffffff 45%, #F0F4FF 100%)",
         }}
       />
 
-      <div className="lk-container px-6 md:px-12 lg:px-20">
+      {/* Large radial blue glow — top-right light source */}
+      <div
+        className="absolute pointer-events-none"
+        aria-hidden="true"
+        style={{
+          inset: 0,
+          background:
+            "radial-gradient(ellipse 75% 65% at 100% 0%, rgba(0,82,255,0.10) 0%, transparent 65%)",
+        }}
+      />
+
+      {/* Secondary radial blue — upper center bloom */}
+      <div
+        className="absolute pointer-events-none"
+        aria-hidden="true"
+        style={{
+          inset: 0,
+          background:
+            "radial-gradient(ellipse 55% 40% at 60% 0%, rgba(0,82,255,0.06) 0%, transparent 60%)",
+        }}
+      />
+
+      {/* Gold warmth glow — bottom-left */}
+      <div
+        className="absolute pointer-events-none"
+        aria-hidden="true"
+        style={{
+          inset: 0,
+          background:
+            "radial-gradient(ellipse 50% 45% at 0% 100%, rgba(255,205,0,0.07) 0%, transparent 65%)",
+        }}
+      />
+
+      {/* Grain texture overlay for material feel */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.025]"
+        aria-hidden="true"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      <div className="lk-container px-6 md:px-12 lg:px-20 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center min-h-[88vh] py-16 lg:py-20">
 
           {/* ── Left: Text content ── */}
@@ -68,9 +113,11 @@ export default function Hero() {
               <Link
                 href="/signup?role=client"
                 className="inline-flex items-center gap-2 font-inter font-semibold text-sm
-                           bg-lk-primary hover:bg-lk-primary-dark text-white
-                           px-7 py-3.5 rounded-xl transition-all
-                           shadow-lg shadow-lk-primary/25 hover:shadow-lk-primary/40 hover:-translate-y-0.5"
+                           text-white px-7 py-3.5 rounded-xl transition-all
+                           shadow-lg shadow-lk-primary/30 hover:shadow-lk-primary/45 hover:-translate-y-0.5"
+                style={{
+                  background: "linear-gradient(135deg, #0052FF 0%, #1A6BFF 100%)",
+                }}
               >
                 Post a Job
                 <span aria-hidden="true">↗</span>
@@ -104,7 +151,7 @@ export default function Hero() {
           {/* ── Right: Image + floating glassmorphic cards ── */}
           <div className="relative hidden lg:block animate-slide-in-right opacity-0">
             {/* Main image */}
-            <div className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl shadow-lk-dark/12">
+            <div className="relative rounded-3xl overflow-hidden aspect-[4/5] shadow-2xl shadow-lk-primary/10">
               <Image
                 src="/images/Filipino_meeting_client.jpg"
                 alt="Filipino professionals collaborating"
@@ -117,8 +164,10 @@ export default function Hero() {
             </div>
 
             {/* Floating card — top left */}
-            <div className="absolute -left-8 top-14 bg-white/85 backdrop-blur-xl rounded-2xl p-4 shadow-xl shadow-lk-dark/8 border border-white/60 w-52 animate-[float-card_5s_ease-in-out_infinite]"
-              style={{ "--card-rotate": "-2deg" } as React.CSSProperties}>
+            <div
+              className="absolute -left-8 top-14 bg-white/85 backdrop-blur-xl rounded-2xl p-4 shadow-xl shadow-lk-dark/8 border border-white/60 w-52 animate-[float-card_5s_ease-in-out_infinite]"
+              style={{ "--card-rotate": "-2deg" } as React.CSSProperties}
+            >
               <div className="flex items-center gap-2.5 mb-2.5">
                 <div className="w-9 h-9 rounded-xl bg-lk-primary flex items-center justify-center text-white font-headline font-bold text-xs shrink-0">
                   MV
@@ -142,8 +191,10 @@ export default function Hero() {
             </div>
 
             {/* Floating card — bottom right */}
-            <div className="absolute -right-8 bottom-20 bg-white/85 backdrop-blur-xl rounded-2xl p-4 shadow-xl shadow-lk-dark/8 border border-white/60 w-52 animate-[float-card_5s_ease-in-out_infinite]"
-              style={{ "--card-rotate": "2deg", animationDelay: "0.7s" } as React.CSSProperties}>
+            <div
+              className="absolute -right-8 bottom-20 bg-white/85 backdrop-blur-xl rounded-2xl p-4 shadow-xl shadow-lk-dark/8 border border-white/60 w-52 animate-[float-card_5s_ease-in-out_infinite]"
+              style={{ "--card-rotate": "2deg", animationDelay: "0.7s" } as React.CSSProperties}
+            >
               <div className="flex items-center gap-2.5 mb-2.5">
                 <div className="w-9 h-9 rounded-xl bg-lk-red flex items-center justify-center text-white font-headline font-bold text-xs shrink-0">
                   JR
@@ -166,7 +217,10 @@ export default function Hero() {
             </div>
 
             {/* Floating stat badge */}
-            <div className="absolute -right-4 top-1/3 bg-lk-primary rounded-2xl p-4 shadow-xl shadow-lk-primary/30">
+            <div
+              className="absolute -right-4 top-1/3 rounded-2xl p-4 shadow-xl shadow-lk-primary/30"
+              style={{ background: "linear-gradient(135deg, #0052FF 0%, #1A6BFF 100%)" }}
+            >
               <div className="text-white font-headline font-bold text-2xl leading-none">100%</div>
               <div className="text-white/70 font-inter text-xs mt-1">ID Verified</div>
             </div>
@@ -180,7 +234,7 @@ export default function Hero() {
           { initials: "MV", name: "Marco V.", role: "Structural Engineer", rating: 4.9, color: "bg-lk-primary" },
           { initials: "JR", name: "Jasmine R.", role: "Full Stack Dev", rating: 5.0, color: "bg-lk-red" },
         ].map((card) => (
-          <div key={card.name} className="bg-lk-neutral rounded-2xl p-4 border border-lk-neutral-mid">
+          <div key={card.name} className="bg-white/80 backdrop-blur-sm rounded-2xl p-4 border border-lk-neutral-mid shadow-sm">
             <div className="flex items-center gap-2 mb-2">
               <div className={`w-8 h-8 rounded-xl ${card.color} flex items-center justify-center text-white font-headline font-bold text-xs shrink-0`}>
                 {card.initials}
