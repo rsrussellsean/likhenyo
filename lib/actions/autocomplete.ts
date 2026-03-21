@@ -31,3 +31,16 @@ export async function getTagSuggestions(query: string): Promise<string[]> {
   if (!data) return [];
   return data as string[];
 }
+
+export async function getProfessionSuggestions(query: string): Promise<string[]> {
+  if (!query || query.length < 2) return [];
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("profiles")
+    .select("profession")
+    .ilike("profession", `%${query}%`)
+    .not("profession", "is", null)
+    .limit(10);
+  if (!data) return [];
+  return [...new Set(data.map((r) => r.profession as string).filter(Boolean))];
+}
