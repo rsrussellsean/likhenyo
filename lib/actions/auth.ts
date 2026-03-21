@@ -89,3 +89,38 @@ export async function signOutAction() {
   await supabase.auth.signOut();
   redirect("/");
 }
+
+export async function updateProfileAction(data: {
+  role: "client" | "freelancer";
+  profession?: string | null;
+  skills?: string[] | null;
+  work_preference?: string | null;
+  location?: string | null;
+}) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error: userError,
+  } = await supabase.auth.getUser();
+
+  if (userError || !user) {
+    return { error: "Not authenticated" };
+  }
+
+  const { error } = await supabase
+    .from("profiles")
+    .update({
+      role: data.role,
+      profession: data.profession ?? null,
+      skills: data.skills && data.skills.length > 0 ? data.skills : null,
+      work_preference: data.work_preference ?? null,
+      location: data.location ?? null,
+    })
+    .eq("id", user.id);
+
+  if (error) {
+    return { error: error.message };
+  }
+
+  redirect("/dashboard");
+}

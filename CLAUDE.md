@@ -414,7 +414,7 @@ before reaching any part of the marketplace.
 </signup_flow>
 
 <current_task>
-@PHASE_2.md
+@PHASE_3.md
 </current_task>
 
 <output_rules>
