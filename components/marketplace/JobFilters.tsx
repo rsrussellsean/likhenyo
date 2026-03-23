@@ -6,46 +6,53 @@ import { SlidersHorizontal, X, Search } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
 import CategoryInput from "./CategoryInput";
 import TagInput from "./TagInput";
-import {
-  getProfessionSuggestions,
-  getSkillSuggestions,
-} from "@/lib/actions/autocomplete";
+import { getJobCategorySuggestions, getTagSuggestions } from "@/lib/actions/autocomplete";
 
-const WORK_PREFS = ["any", "remote", "onsite", "hybrid"] as const;
+const WORK_MODES = ["any", "remote", "onsite", "hybrid"] as const;
+const BUDGET_TYPES = ["any", "fixed", "hourly"] as const;
+const POSTED_OPTIONS = [
+  { label: "Any time", value: "any" },
+  { label: "Today", value: "today" },
+  { label: "This week", value: "week" },
+  { label: "This month", value: "month" },
+];
 const SORT_OPTIONS = [
-  { label: "Highest Rated", value: "rating" },
-  { label: "Most Reviews", value: "reviews" },
   { label: "Newest", value: "newest" },
-  { label: "Rate: Low to High", value: "rate_low" },
+  { label: "Budget: High to Low", value: "budget_high" },
+  { label: "Budget: Low to High", value: "budget_low" },
+  { label: "Most Applicants", value: "most_applicants" },
 ];
 
-const RATE_MAX = 5000;
+const BUDGET_MAX = 500000;
 
-export default function FreelancerFilters() {
+export default function JobFilters() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
   const [mobileOpen, setMobileOpen] = useState(false);
 
-  // Read current values from URL
+  // Read current filter values from URL
   const keyword = searchParams.get("keyword") ?? "";
-  const profession = searchParams.get("profession") ?? "";
-  const skills = searchParams.get("skills")?.split(",").filter(Boolean) ?? [];
-  const workPref = searchParams.get("work_preference") ?? "any";
+  const category = searchParams.get("category") ?? "";
+  const tags = searchParams.get("tags")?.split(",").filter(Boolean) ?? [];
+  const workMode = searchParams.get("work_mode") ?? "any";
   const location = searchParams.get("location") ?? "";
-  const rateMin = Number(searchParams.get("rate_min") ?? 0);
-  const rateMax = Number(searchParams.get("rate_max") ?? 0);
-  const verifiedOnly = searchParams.get("verified_only") === "true";
-  const sort = searchParams.get("sort") ?? "rating";
+  const budgetType = searchParams.get("budget_type") ?? "any";
+  const budgetMin = Number(searchParams.get("budget_min") ?? 0);
+  const budgetMax = Number(searchParams.get("budget_max") ?? 0);
+  const postedWithin = searchParams.get("posted_within") ?? "any";
+  const sort = searchParams.get("sort") ?? "newest";
 
   // Local keyword state for debouncing
   const [localKeyword, setLocalKeyword] = useState(keyword);
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  // Sync local keyword with URL when URL changes externally
   useEffect(() => {
     setLocalKeyword(keyword);
   }, [keyword]);
 
+  // Push filter changes to URL
   const pushParams = useCallback(
     (updates: Record<string, string | undefined>) => {
       const params = new URLSearchParams(searchParams.toString());
@@ -56,14 +63,15 @@ export default function FreelancerFilters() {
           params.set(key, val);
         }
       });
-      params.delete("page");
+      params.delete("page"); // Reset to page 1 on filter change
       startTransition(() => {
-        router.push(`/freelancers?${params.toString()}`);
+        router.push(`/jobs?${params.toString()}`);
       });
     },
-    [router, searchParams, startTransition],
+    [router, searchParams, startTransition]
   );
 
+  // Debounced keyword search
   function handleKeywordChange(val: string) {
     setLocalKeyword(val);
     if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -74,38 +82,37 @@ export default function FreelancerFilters() {
 
   function clearAll() {
     startTransition(() => {
-      router.push("/freelancers");
+      router.push("/jobs");
     });
   }
 
+  // Count active filters (excluding sort)
   const activeCount = [
     keyword,
-    profession,
-    skills.length > 0 ? "s" : "",
-    workPref !== "any" ? workPref : "",
+    category,
+    tags.length > 0 ? "t" : "",
+    workMode !== "any" ? workMode : "",
     location,
-    rateMin > 0 ? "rmin" : "",
-    rateMax > 0 ? "rmax" : "",
-    verifiedOnly ? "v" : "",
+    budgetType !== "any" ? budgetType : "",
+    budgetMin > 0 ? "bmin" : "",
+    budgetMax > 0 ? "bmax" : "",
+    postedWithin !== "any" ? postedWithin : "",
   ].filter(Boolean).length;
 
   const filterPanel = (
     <div className="space-y-5">
-      {/* Keyword */}
+      {/* Keyword search */}
       <div>
         <label className="font-inter text-xs font-semibold text-lk-dark/50 uppercase tracking-wide mb-1.5 block">
           Keyword
         </label>
         <div className="relative">
-          <Search
-            size={14}
-            className="absolute left-3 top-1/2 -translate-y-1/2 text-lk-dark/30"
-          />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-lk-dark/30" />
           <input
             type="text"
             value={localKeyword}
             onChange={(e) => handleKeywordChange(e.target.value)}
-            placeholder="Search freelancers..."
+            placeholder="Search jobs..."
             className="w-full h-10 pl-9 pr-3 rounded-xl bg-lk-neutral border border-lk-neutral-mid
                        font-inter text-sm text-lk-dark placeholder:text-lk-dark/30
                        focus:outline-none focus:border-lk-primary focus:ring-2 focus:ring-lk-primary/15 transition-all"
@@ -113,132 +120,149 @@ export default function FreelancerFilters() {
         </div>
       </div>
 
-      {/* Profession */}
+      {/* Category */}
       <div>
         <label className="font-inter text-xs font-semibold text-lk-dark/50 uppercase tracking-wide mb-1.5 block">
-          Profession
+          Category
         </label>
         <CategoryInput
-          value={profession}
-          onChange={(val) => pushParams({ profession: val || undefined })}
-          placeholder="e.g. Structural Engineer"
-          getSuggestions={getProfessionSuggestions}
+          value={category}
+          onChange={(val) => pushParams({ category: val || undefined })}
+          placeholder="e.g. Web Developer, Engineer"
+          getSuggestions={getJobCategorySuggestions}
         />
       </div>
 
-      {/* Skills */}
+      {/* Tags */}
       <div>
         <label className="font-inter text-xs font-semibold text-lk-dark/50 uppercase tracking-wide mb-1.5 block">
-          Skills
+          Tags
         </label>
         <TagInput
-          value={skills}
-          onChange={(newSkills) =>
-            pushParams({
-              skills: newSkills.length > 0 ? newSkills.join(",") : undefined,
-            })
+          value={tags}
+          onChange={(newTags) =>
+            pushParams({ tags: newTags.length > 0 ? newTags.join(",") : undefined })
           }
-          placeholder="e.g. React, AutoCAD"
-          getSuggestions={getSkillSuggestions}
+          placeholder="e.g. React, Node.js"
+          getSuggestions={getTagSuggestions}
         />
       </div>
 
-      {/* Work Preference */}
+      {/* Work Mode */}
       <div>
         <label className="font-inter text-xs font-semibold text-lk-dark/50 uppercase tracking-wide mb-1.5 block">
-          Work Preference
+          Work Mode
         </label>
         <div className="flex gap-1">
-          {WORK_PREFS.map((pref) => (
+          {WORK_MODES.map((mode) => (
             <button
-              key={pref}
+              key={mode}
               type="button"
-              onClick={() =>
-                pushParams({
-                  work_preference: pref === "any" ? undefined : pref,
-                })
-              }
+              onClick={() => pushParams({ work_mode: mode === "any" ? undefined : mode })}
               className={`flex-1 h-9 rounded-lg font-inter text-xs font-medium capitalize transition-colors ${
-                workPref === pref || (pref === "any" && workPref === "any")
+                workMode === mode || (mode === "any" && workMode === "any")
                   ? "bg-lk-primary text-white"
                   : "bg-lk-neutral text-lk-dark/60 hover:bg-lk-primary-pale"
               }`}
             >
-              {pref === "onsite" ? "On-site" : pref === "any" ? "Any" : pref}
+              {mode === "onsite" ? "On-site" : mode === "any" ? "Any" : mode}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Location */}
+      {/* Location — shown only when work_mode is onsite or hybrid */}
+      {(workMode === "onsite" || workMode === "hybrid") && (
+        <div>
+          <label className="font-inter text-xs font-semibold text-lk-dark/50 uppercase tracking-wide mb-1.5 block">
+            Location
+          </label>
+          <input
+            type="text"
+            value={location}
+            onChange={(e) => pushParams({ location: e.target.value || undefined })}
+            placeholder="e.g. Cebu City"
+            className="w-full h-10 px-3 rounded-xl bg-lk-neutral border border-lk-neutral-mid
+                       font-inter text-sm text-lk-dark placeholder:text-lk-dark/30
+                       focus:outline-none focus:border-lk-primary focus:ring-2 focus:ring-lk-primary/15 transition-all"
+          />
+        </div>
+      )}
+
+      {/* Budget Type */}
       <div>
         <label className="font-inter text-xs font-semibold text-lk-dark/50 uppercase tracking-wide mb-1.5 block">
-          Location
+          Budget Type
         </label>
-        <input
-          type="text"
-          value={location}
-          onChange={(e) =>
-            pushParams({ location: e.target.value || undefined })
-          }
-          placeholder="e.g. Cebu City"
-          className="w-full h-10 px-3 rounded-xl bg-lk-neutral border border-lk-neutral-mid
-                     font-inter text-sm text-lk-dark placeholder:text-lk-dark/30
-                     focus:outline-none focus:border-lk-primary focus:ring-2 focus:ring-lk-primary/15 transition-all"
-        />
+        <div className="flex gap-1">
+          {BUDGET_TYPES.map((bt) => (
+            <button
+              key={bt}
+              type="button"
+              onClick={() => pushParams({ budget_type: bt === "any" ? undefined : bt })}
+              className={`flex-1 h-9 rounded-lg font-inter text-xs font-medium capitalize transition-colors ${
+                budgetType === bt || (bt === "any" && budgetType === "any")
+                  ? "bg-lk-primary text-white"
+                  : "bg-lk-neutral text-lk-dark/60 hover:bg-lk-primary-pale"
+              }`}
+            >
+              {bt === "any" ? "Any" : bt}
+            </button>
+          ))}
+        </div>
       </div>
 
-      {/* Hourly Rate Range */}
+      {/* Budget Range */}
       <div>
         <label className="font-inter text-xs font-semibold text-lk-dark/50 uppercase tracking-wide mb-1.5 block">
-          Hourly Rate Range
+          Budget Range
         </label>
         <div className="px-1">
           <Slider
-            value={[rateMin, rateMax || RATE_MAX]}
+            value={[budgetMin, budgetMax || BUDGET_MAX]}
             min={0}
-            max={RATE_MAX}
-            step={50}
+            max={BUDGET_MAX}
+            step={1000}
             onValueCommit={(val) => {
               pushParams({
-                rate_min: val[0] > 0 ? String(val[0]) : undefined,
-                rate_max: val[1] < RATE_MAX ? String(val[1]) : undefined,
+                budget_min: val[0] > 0 ? String(val[0]) : undefined,
+                budget_max: val[1] < BUDGET_MAX ? String(val[1]) : undefined,
               });
             }}
           />
         </div>
         <div className="flex justify-between mt-2">
           <span className="font-inter text-xs text-lk-dark/40">
-            {rateMin > 0 ? `₱${rateMin.toLocaleString()}/hr` : "₱0/hr"}
+            {budgetMin > 0 ? `₱${budgetMin.toLocaleString()}` : "₱0"}
           </span>
           <span className="font-inter text-xs text-lk-dark/40">
-            {rateMax > 0 && rateMax < RATE_MAX
-              ? `₱${rateMax.toLocaleString()}/hr`
-              : `₱${RATE_MAX.toLocaleString()}/hr`}
+            {budgetMax > 0 && budgetMax < BUDGET_MAX
+              ? `₱${budgetMax.toLocaleString()}`
+              : `₱${BUDGET_MAX.toLocaleString()}`}
           </span>
         </div>
       </div>
 
-      {/* Verified Only */}
-      <div className="flex items-center justify-between">
-        <label className="font-inter text-sm font-medium text-lk-dark">
-          Verified Only
+      {/* Posted Within */}
+      <div>
+        <label className="font-inter text-xs font-semibold text-lk-dark/50 uppercase tracking-wide mb-1.5 block">
+          Posted Within
         </label>
-        <button
-          type="button"
-          onClick={() =>
-            pushParams({ verified_only: verifiedOnly ? undefined : "true" })
+        <select
+          value={postedWithin}
+          onChange={(e) =>
+            pushParams({ posted_within: e.target.value === "any" ? undefined : e.target.value })
           }
-          className={`relative w-11 h-6 rounded-full transition-colors ${
-            verifiedOnly ? "bg-lk-primary" : "bg-lk-neutral-mid"
-          }`}
+          className="w-full h-10 px-3 rounded-xl bg-lk-neutral border border-lk-neutral-mid
+                     font-inter text-sm text-lk-dark
+                     focus:outline-none focus:border-lk-primary focus:ring-2 focus:ring-lk-primary/15 transition-all"
         >
-          <span
-            className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform ${
-              verifiedOnly ? "translate-x-5" : "translate-x-0"
-            }`}
-          />
-        </button>
+          {POSTED_OPTIONS.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Sort */}
@@ -249,9 +273,7 @@ export default function FreelancerFilters() {
         <select
           value={sort}
           onChange={(e) =>
-            pushParams({
-              sort: e.target.value === "rating" ? undefined : e.target.value,
-            })
+            pushParams({ sort: e.target.value === "newest" ? undefined : e.target.value })
           }
           className="w-full h-10 px-3 rounded-xl bg-lk-neutral border border-lk-neutral-mid
                      font-inter text-sm text-lk-dark
@@ -311,9 +333,7 @@ export default function FreelancerFilters() {
       <div className="hidden lg:block">
         <div className="bg-white rounded-2xl border border-lk-neutral-mid p-5 sticky top-20">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-headline font-bold text-lk-dark text-sm">
-              Filters
-            </h3>
+            <h3 className="font-headline font-bold text-lk-dark text-sm">Filters</h3>
             {activeCount > 0 && (
               <span className="font-inter text-xs text-lk-primary font-semibold">
                 {activeCount} active
